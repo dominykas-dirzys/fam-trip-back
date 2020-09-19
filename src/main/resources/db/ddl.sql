@@ -15,7 +15,7 @@ create table hotel
     water_slides          boolean             not null,
     spa                   boolean             not null,
     distance_to_beach     int,
-    distance_from_airport int,
+    distance_from_airport double,
     remarks               text
 );
 
@@ -37,7 +37,7 @@ create table room
 (
     id           bigint unsigned auto_increment primary key,
     type         varchar(50) unique,
-    room_type_id varchar(50),
+    room_type_id bigint unsigned not null,
     constraint fk_room_room_type foreign key (room_type_id) references room_type (id),
     size         varchar(50),
     condition    varchar(50),
