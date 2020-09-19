@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
     <groupId>lt.sdacademy</groupId>
-    <artifactId>fam-trip-app</artifactId>
+    <artifactId>fam-trip</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
 
