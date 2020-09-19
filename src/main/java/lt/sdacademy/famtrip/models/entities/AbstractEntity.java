@@ -1,4 +1,4 @@
-package lt.sdacademy.university.models.entities;
+package lt.sdacademy.famtrip.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
