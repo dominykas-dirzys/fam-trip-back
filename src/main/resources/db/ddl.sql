@@ -1,13 +1,8 @@
--- DDL
-
--- Sarunas
-
 create table user
 (
-    id        bigint unsigned auto_increment primary key,
-    user_name varchar(100) unique not null,
-    password  varchar(60)         not null,
-    email     varchar(255) unique not null
+    id       bigint unsigned auto_increment primary key,
+    password varchar(60)         not null,
+    email    varchar(255) unique not null
 );
 
 create table hotel
@@ -103,7 +98,3 @@ create table hotel_cuisine_type
     cuisine_type_id bigint unsigned not null,
     constraint fk_hotel_cuisine_type_cuisine_type foreign key (cuisine_type_id) references cuisine_type (id)
 );
-
--- Dominykas
-
--- Birute
