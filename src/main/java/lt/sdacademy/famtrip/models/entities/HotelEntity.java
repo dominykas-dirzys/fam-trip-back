@@ -3,16 +3,21 @@ package lt.sdacademy.famtrip.models.entities;
 import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.TerritorySize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +70,12 @@ public class HotelEntity extends AbstractEntity {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "hotel_recommended_to", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "recommended_to_id"))
     private List<RecommendedToEntity> recommendedTos = new ArrayList<>();
+
+    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @OrderBy(value = "id")
+    private List<RoomEntity> rooms;
 
     public String getName() {
         return name;
@@ -176,5 +187,13 @@ public class HotelEntity extends AbstractEntity {
 
     public void setRecommendedTos(List<RecommendedToEntity> recommendedTos) {
         this.recommendedTos = recommendedTos;
+    }
+
+    public List<RoomEntity> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<RoomEntity> rooms) {
+        this.rooms = rooms;
     }
 }
