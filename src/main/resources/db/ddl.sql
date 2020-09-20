@@ -14,7 +14,7 @@ create table hotel
 (
     id                    bigint unsigned auto_increment primary key,
     name                  varchar(100) unique not null,
-    city_id               varchar(100)        not null,
+    city_id               bigint unsigned     not null,
     constraint fk_hotel_city foreign key (city_id) references city (id),
     official_rating       varchar(50)         not null,
     inspection_score      tinyint             not null,
@@ -38,8 +38,8 @@ create table country
 create table city
 (
     id         bigint unsigned auto_increment primary key,
-    title      varchar(100) not null,
-    country_id varchar(50)  not null,
+    title      varchar(100)    not null,
+    country_id bigint unsigned not null,
     constraint fk_hotel_country foreign key (country_id) references country (id)
 );
 
