@@ -14,7 +14,7 @@ public class CityEntity extends AbstractEntity {
     @Column(name = "title", length = 100, nullable = false)
     private String title;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", nullable = false)
     private CountryEntity country;
 
@@ -26,7 +26,7 @@ public class CityEntity extends AbstractEntity {
         this.title = title;
     }
 }
-}
+
 
 
 
