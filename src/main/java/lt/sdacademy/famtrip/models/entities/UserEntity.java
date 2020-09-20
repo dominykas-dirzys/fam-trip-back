@@ -1,28 +1,18 @@
 package lt.sdacademy.famtrip.models.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "user")
 public class UserEntity extends AbstractEntity {
 
-    @Column(name = "id", length = 50, nullable = false)
-    private String id;
-
     @Column(name = "password", length = 60, nullable = false)
     private String password;
 
-    @Column(name = "email", length = 50, nullable = false)
+    @Column(name = "email", length = 50, unique = true, nullable = false)
     private String email;
-
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "user", orphanRemoval = true)
-    private List<UserEntity> id = new ArrayList<>();
 
     public String getId() {
         return id;
