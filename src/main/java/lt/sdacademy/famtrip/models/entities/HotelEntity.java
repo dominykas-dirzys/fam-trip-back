@@ -2,6 +2,7 @@ package lt.sdacademy.famtrip.models.entities;
 
 import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelRating;
+import lt.sdacademy.famtrip.models.Size;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -70,6 +71,14 @@ public class HotelEntity extends AbstractEntity {
     @JoinTable(name = "hotel_recommended_to", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "recommended_to_id"))
     private List<RecommendedToEntity> recommendedTos = new ArrayList<>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "hotel_cuisine_type", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "cuisine_type_id"))
+    private List<CuisineTypeEntity> cuisineTypes = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "hotel_label", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
+    private List<LabelEntity> labels = new ArrayList<>();
+
     @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -130,6 +139,22 @@ public class HotelEntity extends AbstractEntity {
 
     public void setTerritorySize(Size territorySize) {
         this.territorySize = territorySize;
+    }
+
+    public List<CuisineTypeEntity> getCuisineTypes() {
+        return cuisineTypes;
+    }
+
+    public void setCuisineTypes(List<CuisineTypeEntity> cuisineTypes) {
+        this.cuisineTypes = cuisineTypes;
+    }
+
+    public List<LabelEntity> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<LabelEntity> labels) {
+        this.labels = labels;
     }
 
     public boolean isWaterSlides() {
