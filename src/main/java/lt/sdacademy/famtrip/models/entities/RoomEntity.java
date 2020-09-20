@@ -72,12 +72,4 @@ public class RoomEntity extends AbstractEntity {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
-
-    public HotelEntity getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(HotelEntity hotel) {
-        this.hotel = hotel;
-    }
 }
