@@ -24,7 +24,7 @@ public class RoomEntity extends AbstractEntity {
 
     @Column(name = "size", length = 50)
     @Enumerated(EnumType.STRING)
-    private Size size;
+    private Size roomSize;
 
     @Column(name = "room_condition", length = 50)
     @Enumerated(EnumType.STRING)
@@ -49,12 +49,12 @@ public class RoomEntity extends AbstractEntity {
         this.roomType = roomType;
     }
 
-    public Size getSize() {
-        return size;
+    public Size getRoomSize() {
+        return roomSize;
     }
 
-    public void setSize(Size size) {
-        this.size = size;
+    public void setRoomSize(Size roomSize) {
+        this.roomSize = roomSize;
     }
 
     public RoomCondition getRoom_condition() {
