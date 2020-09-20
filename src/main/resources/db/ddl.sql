@@ -6,28 +6,41 @@ create table user
 (
     id        bigint unsigned auto_increment primary key,
     user_name varchar(100) unique not null,
-    password  varchar(255)        not null,
+    password  varchar(60)         not null,
     email     varchar(255) unique not null
 );
-
 
 create table hotel
 (
     id                    bigint unsigned auto_increment primary key,
     name                  varchar(100) unique not null,
-    country               varchar(50)         not null,
-    city_region           varchar(100)        not null,
+    city_id               varchar(100)        not null,
+    constraint fk_hotel_city foreign key (city_id) references city (id),
     official_rating       varchar(50)         not null,
-    inspection_score      int                 not null,
+    inspection_score      tinyint             not null,
     food_quality          varchar(50),
     territory_size        varchar(50),
-    water_slides          boolean             not null,
-    spa                   boolean             not null,
+    water_slides          boolean             not null default :false,
+    spa                   boolean             not null default :false,
     distance_to_beach     int,
     distance_from_airport double,
     remarks               text,
-    user_id               bigint unsigned     not null,
-    constraint fk_hotel_user foreign key (user_id) references user (id)
+    author_id             bigint unsigned     not null,
+    constraint fk_hotel_user foreign key (author_id) references user (id)
+);
+
+create table country
+(
+    id    bigint unsigned auto_increment primary key,
+    title varchar(50) not null
+);
+
+create table city
+(
+    id         bigint unsigned auto_increment primary key,
+    title      varchar(100) not null,
+    country_id varchar(50)  not null,
+    constraint fk_hotel_country foreign key (country_id) references country (id)
 );
 
 create table recommended_to
