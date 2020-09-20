@@ -9,17 +9,15 @@ public class HotelEntity extends AbstractEntity {
     @Column(name = "name", length = 100, nullable = false, unique = true)
     private String name;
 
-    @Column(name = "country", length = 50, nullable = false)
-    private String country;
-
-    @Column(name = "city_region", length = 100, nullable = false)
-    private String cityRegion;
+    @OneToOne
+    @JoinColumn(name = "city_id", nullable = false)
+    private CityEntity city;
 
     @Column(name = "official_rating", length = 50, nullable = false)
     private String officialRating;
 
     @Column(name = "inspection_score", nullable = false)
-    private int inspectionScore;
+    private Integer inspectionScore;
 
     @Column(name = "food_quality", length = 50)
     private String foodQuality;
@@ -34,10 +32,10 @@ public class HotelEntity extends AbstractEntity {
     private boolean spa;
 
     @Column(name = "distance_to_beach")
-    private int distanceToBeach;
+    private Integer distanceToBeach;
 
     @Column(name = "distance_from_airport")
-    private double distanceFromAirport;
+    private Double distanceFromAirport;
 
     @Column(name = "remarks")
     private String remarks;
@@ -62,12 +60,12 @@ public class HotelEntity extends AbstractEntity {
         this.country = country;
     }
 
-    public String getCityRegion() {
-        return cityRegion;
+    public CityEntity getCity() {
+        return city;
     }
 
-    public void setCityRegion(String cityRegion) {
-        this.cityRegion = cityRegion;
+    public void setCity(CityEntity city) {
+        this.city = city;
     }
 
     public String getOfficialRating() {
@@ -78,11 +76,11 @@ public class HotelEntity extends AbstractEntity {
         this.officialRating = officialRating;
     }
 
-    public int getInspectionScore() {
+    public Integer getInspectionScore() {
         return inspectionScore;
     }
 
-    public void setInspectionScore(int inspectionScore) {
+    public void setInspectionScore(Integer inspectionScore) {
         this.inspectionScore = inspectionScore;
     }
 
@@ -118,19 +116,19 @@ public class HotelEntity extends AbstractEntity {
         this.spa = spa;
     }
 
-    public int getDistanceToBeach() {
+    public Integer getDistanceToBeach() {
         return distanceToBeach;
     }
 
-    public void setDistanceToBeach(int distanceToBeach) {
+    public void setDistanceToBeach(Integer distanceToBeach) {
         this.distanceToBeach = distanceToBeach;
     }
 
-    public double getDistanceFromAirport() {
+    public Double getDistanceFromAirport() {
         return distanceFromAirport;
     }
 
-    public void setDistanceFromAirport(double distanceFromAirport) {
+    public void setDistanceFromAirport(Double distanceFromAirport) {
         this.distanceFromAirport = distanceFromAirport;
     }
 
