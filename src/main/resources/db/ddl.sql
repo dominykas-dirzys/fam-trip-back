@@ -2,6 +2,15 @@
 
 -- Sarunas
 
+create table user
+(
+    id        bigint unsigned auto_increment primary key,
+    user_name varchar(100) unique not null,
+    password  varchar(255)        not null,
+    email     varchar(255) unique not null
+);
+
+
 create table hotel
 (
     id                    bigint unsigned auto_increment primary key,
@@ -16,7 +25,9 @@ create table hotel
     spa                   boolean             not null,
     distance_to_beach     int,
     distance_from_airport double,
-    remarks               text
+    remarks               text,
+    user_id               bigint unsigned     not null,
+    constraint fk_hotel_user foreign key (user_id) references user (id)
 );
 
 create table recommended_to
