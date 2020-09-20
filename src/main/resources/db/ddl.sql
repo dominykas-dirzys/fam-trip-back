@@ -32,7 +32,7 @@ create table hotel
 create table country
 (
     id    bigint unsigned auto_increment primary key,
-    title varchar(50) not null
+    title varchar(50) unique not null
 );
 
 create table city
