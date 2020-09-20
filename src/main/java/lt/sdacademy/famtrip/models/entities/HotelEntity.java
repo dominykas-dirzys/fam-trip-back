@@ -1,10 +1,21 @@
 package lt.sdacademy.famtrip.models.entities;
 
+import lt.sdacademy.famtrip.models.FoodQuality;
+import lt.sdacademy.famtrip.models.HotelRating;
+import lt.sdacademy.famtrip.models.TerritorySize;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "hotel")
@@ -18,16 +29,19 @@ public class HotelEntity extends AbstractEntity {
     private CityEntity city;
 
     @Column(name = "official_rating", length = 50, nullable = false)
-    private String officialRating;
+    @Enumerated(EnumType.STRING)
+    private HotelRating officialRating;
 
     @Column(name = "inspection_score", nullable = false)
     private Integer inspectionScore;
 
     @Column(name = "food_quality", length = 50)
-    private String foodQuality;
+    @Enumerated(EnumType.STRING)
+    private FoodQuality foodQuality;
 
     @Column(name = "territory_size", length = 50)
-    private String territorySize;
+    @Enumerated(EnumType.STRING)
+    private TerritorySize territorySize;
 
     @Column(name = "water_slides", nullable = false)
     private boolean waterSlides;
@@ -47,6 +61,10 @@ public class HotelEntity extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private UserEntity author;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "hotel_recommended_to", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "recommended_to_id"))
+    private List<RecommendedToEntity> recommendedTos = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -72,11 +90,11 @@ public class HotelEntity extends AbstractEntity {
         this.city = city;
     }
 
-    public String getOfficialRating() {
+    public HotelRating getOfficialRating() {
         return officialRating;
     }
 
-    public void setOfficialRating(String officialRating) {
+    public void setOfficialRating(HotelRating officialRating) {
         this.officialRating = officialRating;
     }
 
@@ -88,19 +106,19 @@ public class HotelEntity extends AbstractEntity {
         this.inspectionScore = inspectionScore;
     }
 
-    public String getFoodQuality() {
+    public FoodQuality getFoodQuality() {
         return foodQuality;
     }
 
-    public void setFoodQuality(String foodQuality) {
+    public void setFoodQuality(FoodQuality foodQuality) {
         this.foodQuality = foodQuality;
     }
 
-    public String getTerritorySize() {
+    public TerritorySize getTerritorySize() {
         return territorySize;
     }
 
-    public void setTerritorySize(String territorySize) {
+    public void setTerritorySize(TerritorySize territorySize) {
         this.territorySize = territorySize;
     }
 
@@ -150,5 +168,13 @@ public class HotelEntity extends AbstractEntity {
 
     public void setAuthor(UserEntity author) {
         this.author = author;
+    }
+
+    public List<RecommendedToEntity> getRecommendedTos() {
+        return recommendedTos;
+    }
+
+    public void setRecommendedTos(List<RecommendedToEntity> recommendedTos) {
+        this.recommendedTos = recommendedTos;
     }
 }
