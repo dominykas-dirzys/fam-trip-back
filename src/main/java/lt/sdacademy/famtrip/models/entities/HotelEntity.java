@@ -2,7 +2,6 @@ package lt.sdacademy.famtrip.models.entities;
 
 import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelRating;
-import lt.sdacademy.famtrip.models.TerritorySize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -46,7 +45,7 @@ public class HotelEntity extends AbstractEntity {
 
     @Column(name = "territory_size", length = 50)
     @Enumerated(EnumType.STRING)
-    private TerritorySize territorySize;
+    private Size territorySize;
 
     @Column(name = "water_slides", nullable = false)
     private boolean waterSlides;
@@ -125,11 +124,11 @@ public class HotelEntity extends AbstractEntity {
         this.foodQuality = foodQuality;
     }
 
-    public TerritorySize getTerritorySize() {
+    public Size getTerritorySize() {
         return territorySize;
     }
 
-    public void setTerritorySize(TerritorySize territorySize) {
+    public void setTerritorySize(Size territorySize) {
         this.territorySize = territorySize;
     }
 
