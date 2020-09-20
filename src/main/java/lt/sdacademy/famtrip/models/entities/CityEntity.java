@@ -25,6 +25,14 @@ public class CityEntity extends AbstractEntity {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public CountryEntity getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountryEntity country) {
+        this.country = country;
+    }
 }
 
 
