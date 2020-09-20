@@ -34,7 +34,7 @@ public class RoomEntity extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "hotel_id", nullable = false)
-    private Hotel hotel;
+    private HotelEntity hotel;
 
     public String getType() {
         return type;
