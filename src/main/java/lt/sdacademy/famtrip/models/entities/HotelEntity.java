@@ -93,14 +93,6 @@ public class HotelEntity extends AbstractEntity {
         this.name = name;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public CityEntity getCity() {
         return city;
     }
