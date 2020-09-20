@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +13,7 @@ public class HotelEntity extends AbstractEntity {
     @Column(name = "name", length = 100, nullable = false, unique = true)
     private String name;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
     private CityEntity city;
 
