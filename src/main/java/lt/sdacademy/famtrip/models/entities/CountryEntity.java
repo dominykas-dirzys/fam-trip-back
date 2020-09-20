@@ -10,12 +10,8 @@ import javax.persistence.Table;
 @Table(name = "country")
 public class CountryEntity extends AbstractEntity {
 
-    @Column(name = "title", length = 50, nullable = false)
+    @Column(name = "title", length = 50, nullable = false, unique = true)
     private String title;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "title", nullable = false)
-    private TitleEntity title;
 
     public String getTitle() {
         return title;
@@ -23,7 +19,5 @@ public class CountryEntity extends AbstractEntity {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
     }
 }

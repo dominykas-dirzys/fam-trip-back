@@ -15,13 +15,13 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "id", length = 50, nullable = false)
     private String id;
 
-    @Column(name = "password", length = 100, nullable = false)
+    @Column(name = "password", length = 60, nullable = false)
     private String password;
 
     @Column(name = "email", length = 50, nullable = false)
     private String email;
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "id", orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "user", orphanRemoval = true)
     private List<UserEntity> id = new ArrayList<>();
 
     public String getId() {
