@@ -11,13 +11,10 @@ import javax.persistence.Table;
 @Table(name = "city")
 public class CityEntity extends AbstractEntity {
 
-    @Column(name = "title", length = 50, nullable = false)
+    @Column(name = "title", length = 100, nullable = false)
     private String title;
 
-    @Column(name = "country_id", length = 50, nullable = false)
-    private String country_id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id", nullable = false)
     private CountryEntity country;
 

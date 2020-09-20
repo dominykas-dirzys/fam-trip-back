@@ -11,16 +11,8 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "password", length = 60, nullable = false)
     private String password;
 
-    @Column(name = "email", length = 50, unique = true, nullable = false)
+    @Column(name = "email", length = 255, unique = true, nullable = false)
     private String email;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getPassword() {
         return password;
