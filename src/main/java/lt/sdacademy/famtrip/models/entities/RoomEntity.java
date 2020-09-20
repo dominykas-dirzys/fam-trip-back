@@ -1,5 +1,6 @@
 package lt.sdacademy.famtrip.models.entities;
 
+import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.Size;
 
 import javax.persistence.Column;
@@ -27,14 +28,10 @@ public class RoomEntity extends AbstractEntity {
 
     @Column(name = "room_condition", length = 50)
     @Enumerated(EnumType.STRING)
-    private String room_condition;
+    private RoomCondition room_condition;
 
     @Column(name = "remarks")
     private String remarks;
-
-    @ManyToOne
-    @JoinColumn(name = "hotel_id", nullable = false)
-    private HotelEntity hotel;
 
     public String getType() {
         return type;
@@ -60,11 +57,11 @@ public class RoomEntity extends AbstractEntity {
         this.size = size;
     }
 
-    public String getRoom_condition() {
+    public RoomCondition getRoom_condition() {
         return room_condition;
     }
 
-    public void setRoom_condition(String room_condition) {
+    public void setRoom_condition(RoomCondition room_condition) {
         this.room_condition = room_condition;
     }
 
@@ -76,7 +73,11 @@ public class RoomEntity extends AbstractEntity {
         this.remarks = remarks;
     }
 
-    public HotelEntity getHotelEntity() {
-        return hotelEntity;
+    public HotelEntity getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(HotelEntity hotel) {
+        this.hotel = hotel;
     }
 }
