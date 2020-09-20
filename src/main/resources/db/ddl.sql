@@ -16,7 +16,7 @@ create table hotel
     id                    bigint unsigned auto_increment primary key,
     name                  varchar(100) unique not null,
     country               varchar(50)         not null,
-    city_region           varchar(50)         not null,
+    city_region           varchar(100)         not null,
     official_rating       varchar(50)         not null,
     inspection_score      int                 not null,
     food_quality          varchar(50),
