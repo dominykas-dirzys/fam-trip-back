@@ -59,7 +59,7 @@ create table room
     room_type_id bigint unsigned not null,
     constraint fk_room_room_type foreign key (room_type_id) references room_type (id),
     size         varchar(50),
-    condition    varchar(50),
+    room_condition    varchar(50),
     remarks      text,
     hotel_id     bigint unsigned not null,
     constraint fk_room_hotel foreign key (hotel_id) references hotel (id)
