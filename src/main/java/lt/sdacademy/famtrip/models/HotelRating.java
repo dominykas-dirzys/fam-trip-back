@@ -1,6 +1,7 @@
 package lt.sdacademy.famtrip.models;
 
 public enum HotelRating {
+
     ONE_STAR,
     TWO_STAR,
     THREE_STAR,
