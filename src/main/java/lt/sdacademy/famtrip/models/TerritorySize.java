@@ -1,6 +1,6 @@
 package lt.sdacademy.famtrip.models;
 
-public enum Size {
+public enum TerritorySize {
 
     SMALL,
     NORMAL,
