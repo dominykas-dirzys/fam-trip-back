@@ -7,7 +7,6 @@ import lt.sdacademy.famtrip.models.Size;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import org.springframework.data.repository.Repository;
 
-import java.math.BigInteger;
 import java.util.List;
 
 public interface HotelRepository extends Repository<HotelEntity, Long> {
@@ -22,7 +21,7 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByNameContains(String name);
 
-    List<HotelEntity> findAllByCityTitle(String city);
+    List<HotelEntity> findAllByCityTitle(String title);
 
     List<HotelEntity> findAllByOfficialRating(HotelRating officialRating);
 
@@ -40,13 +39,11 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByDistanceFromAirport(Double distanceFromAirport);
 
-    List<HotelEntity> findAllByAuthor(BigInteger authorId);
+    List<HotelEntity> findAllByAuthor(Long authorId);
 
-    List<HotelEntity> findAllByCountryTitle(String country);
+    List<HotelEntity> findAllByCountryTitle(String title);
 
-    List<HotelEntity> findAllByRecommendedTosTitle(String recommendedTo);
-
-    List<HotelEntity> findAllByUserId(Long id);
+    List<HotelEntity> findAllByRecommendedTosTitle(String title);
 
     List<HotelEntity> findAllByLabelsTitle(String title);
 

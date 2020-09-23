@@ -8,7 +8,6 @@ import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import lt.sdacademy.famtrip.repositories.HotelRepository;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -40,8 +39,8 @@ public class HotelService {
         return hotelRepository.findAllByNameContains(name);
     }
 
-    public List<HotelEntity> getHotelsByCityTitle(String city) {
-        return hotelRepository.findAllByCityTitle(city);
+    public List<HotelEntity> getHotelsByCityTitle(String cityTitle) {
+        return hotelRepository.findAllByCityTitle(cityTitle);
     }
 
     public List<HotelEntity> getHotelsByOfficialRating(HotelRating officialRating) {
@@ -76,20 +75,16 @@ public class HotelService {
         return hotelRepository.findAllByDistanceFromAirport(distanceFromAirport);
     }
 
-    public List<HotelEntity> getHotelsByAuthor(BigInteger authorId) {
+    public List<HotelEntity> getHotelsByAuthor(Long authorId) {
         return hotelRepository.findAllByAuthor(authorId);
     }
 
-    public List<HotelEntity> getHotelsByCountryTitle(String country) {
-        return hotelRepository.findAllByCountryTitle(country);
+    public List<HotelEntity> getHotelsByCountryTitle(String countryTitle) {
+        return hotelRepository.findAllByCountryTitle(countryTitle);
     }
 
-    public List<HotelEntity> getHotelsByRecommendedTosTitle(String recommendedTo) {
-        return hotelRepository.findAllByRecommendedTosTitle(recommendedTo);
-    }
-
-    public List<HotelEntity> getHotelsByUserId(Long id) {
-        return hotelRepository.findAllByUserId(id);
+    public List<HotelEntity> getHotelsByRecommendedTosTitle(String recommendedToTitle) {
+        return hotelRepository.findAllByRecommendedTosTitle(recommendedToTitle);
     }
 
     public List<HotelEntity> getHotelsByLabelsTitle(String title) {
