@@ -29,7 +29,7 @@ public class HotelEntity extends AbstractEntity {
     @Column(name = "name", length = 100, nullable = false, unique = true)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id", nullable = false)
     private CityEntity city;
 
@@ -38,7 +38,7 @@ public class HotelEntity extends AbstractEntity {
     private HotelRating officialRating;
 
     @Column(name = "inspection_score", nullable = false)
-    private Integer inspectionScore;
+    private Byte inspectionScore;
 
     @Column(name = "food_quality", length = 50)
     @Enumerated(EnumType.STRING)
@@ -60,10 +60,10 @@ public class HotelEntity extends AbstractEntity {
     @Column(name = "distance_from_airport")
     private Double distanceFromAirport;
 
-    @Column(name = "remarks")
+    @Column(name = "remarks", columnDefinition = "text")
     private String remarks;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
     private UserEntity author;
 
@@ -109,11 +109,11 @@ public class HotelEntity extends AbstractEntity {
         this.officialRating = officialRating;
     }
 
-    public Integer getInspectionScore() {
+    public Byte getInspectionScore() {
         return inspectionScore;
     }
 
-    public void setInspectionScore(Integer inspectionScore) {
+    public void setInspectionScore(Byte inspectionScore) {
         this.inspectionScore = inspectionScore;
     }
 

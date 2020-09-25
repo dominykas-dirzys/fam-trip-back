@@ -25,7 +25,7 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByOfficialRating(HotelRating officialRating);
 
-    List<HotelEntity> findAllByInspectionScore(Integer inspectionScore);
+    List<HotelEntity> findAllByInspectionScore(Byte inspectionScore);
 
     List<HotelEntity> findAllByFoodQuality(FoodQuality foodQuality);
 
@@ -41,7 +41,7 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByAuthor(Long authorId);
 
-    List<HotelEntity> findAllByCountryTitle(String title);
+    List<HotelEntity> findAllByCityCountryTitle(String title);
 
     List<HotelEntity> findAllByRecommendedTosTitle(String title);
 
@@ -49,11 +49,9 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByCuisineTypesTitle(String title);
 
-    List<HotelEntity> findAllByRoomsTypeId(Long id);
-
     List<HotelEntity> findAllByRoomsType(String type);
 
-    List<HotelEntity> findAllByRoomsSize(Size roomSize);
+    List<HotelEntity> findAllByRoomsRoomSize(Size roomSize);
 
     List<HotelEntity> findAllByRoomsRoomCondition(RoomCondition roomCondition);
 }

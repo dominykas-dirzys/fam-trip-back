@@ -6,6 +6,7 @@ import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.Size;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import lt.sdacademy.famtrip.repositories.HotelRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class HotelService {
         return hotelRepository.findAllByOfficialRating(officialRating);
     }
 
-    public List<HotelEntity> getHotelsByInspectionScore(Integer inspectionScore) {
+    public List<HotelEntity> getHotelsByInspectionScore(Byte inspectionScore) {
         return hotelRepository.findAllByInspectionScore(inspectionScore);
     }
 
@@ -79,8 +80,8 @@ public class HotelService {
         return hotelRepository.findAllByAuthor(authorId);
     }
 
-    public List<HotelEntity> getHotelsByCountryTitle(String countryTitle) {
-        return hotelRepository.findAllByCountryTitle(countryTitle);
+    public List<HotelEntity> getHotelsByCityCountryTitle(String title) {
+        return hotelRepository.findAllByCityCountryTitle(title);
     }
 
     public List<HotelEntity> getHotelsByRecommendedTosTitle(String recommendedToTitle) {
@@ -95,16 +96,12 @@ public class HotelService {
         return hotelRepository.findAllByCuisineTypesTitle(title);
     }
 
-    public List<HotelEntity> getHotelsByRoomsTypeId(Long id) {
-        return hotelRepository.findAllByRoomsTypeId(id);
-    }
-
     public List<HotelEntity> getHotelsByRoomsType(String type) {
         return hotelRepository.findAllByRoomsType(type);
     }
 
-    public List<HotelEntity> getHotelsByRoomsSize(Size roomSize) {
-        return hotelRepository.findAllByRoomsSize(roomSize);
+    public List<HotelEntity> getHotelsByRoomsRoomSize(Size roomSize) {
+        return hotelRepository.findAllByRoomsRoomSize(roomSize);
     }
 
     public List<HotelEntity> getHotelsByRoomsRoomCondition(RoomCondition roomCondition) {

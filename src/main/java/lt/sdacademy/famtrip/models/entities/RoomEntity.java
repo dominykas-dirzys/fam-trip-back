@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,7 +19,7 @@ public class RoomEntity extends AbstractEntity {
     @Column(name = "type", length = 50, unique = true)
     private String type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id", nullable = false)
     private RoomTypeEntity roomType;
 
@@ -28,9 +29,9 @@ public class RoomEntity extends AbstractEntity {
 
     @Column(name = "room_condition", length = 50)
     @Enumerated(EnumType.STRING)
-    private RoomCondition room_condition;
+    private RoomCondition roomCondition;
 
-    @Column(name = "remarks")
+    @Column(name = "remarks", columnDefinition = "text")
     private String remarks;
 
     public String getType() {
@@ -57,12 +58,12 @@ public class RoomEntity extends AbstractEntity {
         this.roomSize = roomSize;
     }
 
-    public RoomCondition getRoom_condition() {
-        return room_condition;
+    public RoomCondition getRoomCondition() {
+        return roomCondition;
     }
 
-    public void setRoom_condition(RoomCondition room_condition) {
-        this.room_condition = room_condition;
+    public void setRoomCondition(RoomCondition roomCondition) {
+        this.roomCondition = roomCondition;
     }
 
     public String getRemarks() {
