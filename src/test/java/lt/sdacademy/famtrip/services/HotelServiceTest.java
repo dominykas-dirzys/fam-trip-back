@@ -103,13 +103,136 @@ class HotelServiceTest {
 
         hotelService.save(hotel);
 
-        List<HotelEntity> hotels = hotelService.getHotels();
+        List<HotelEntity> result = hotelService.getHotels();
 
-        assertEquals(1, hotels.size());
-        assertEquals("Test Hotel", hotels.get(0).getName());
-        assertEquals(HotelRating.FIVE_STAR, hotels.get(0).getOfficialRating());
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+        assertEquals(HotelRating.FIVE_STAR, result.get(0).getOfficialRating());
     }
 
+    @Test
+    void save() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        assertNotNull(hotel.getId());
+        assertEquals("Test Hotel", hotel.getName());
+        assertEquals(HotelRating.FIVE_STAR, hotel.getOfficialRating());
+    }
+
+    @Test
+    void delete() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+        List<HotelEntity> hotels = hotelService.getHotels();
+        int oldSize = hotels.size();
+        hotelService.delete(hotels.get(0));
+        hotels = hotelService.getHotels();
+
+        assertEquals(oldSize - 1, hotels.size());
+    }
 
     @Test
     void getHotelByName() {
@@ -171,5 +294,1140 @@ class HotelServiceTest {
 
         assertNotNull(result);
         assertEquals("Test Hotel", result.getName());
+    }
+
+    @Test
+    void getHotelsByNameContains() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByNameContains("Test");
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+
+    @Test
+    void getHotelsByCityTitle() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByCityTitle("TestCity");
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByOfficialRating() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByOfficialRating(HotelRating.FIVE_STAR);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByInspectionScore() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByInspectionScore((byte) 10);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByFoodQuality() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByFoodQuality(FoodQuality.FANTASTIC);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByTerritorySize() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByTerritorySize(Size.LARGE);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByWaterSlides() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByWaterSlides(true);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsBySpa() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsBySpa(true);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByDistanceToBeach() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByDistanceToBeach(500);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByDistanceFromAirport() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByDistanceFromAirport(10.0);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByAuthorId() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByAuthorId(user.getId());
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByCityCountryTitle() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByCityCountryTitle("TestNation");
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByRecommendedTosTitle() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByRecommendedTosTitle("Family");
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByLabelsTitle() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByLabelsTitle("Economy");
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByCuisineTypesTitle() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByCuisineTypesTitle("Local");
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByRoomsRoomTypeTitle() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByRoomsTypeTitle(Title.STANDARD_DBL);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByRoomsRoomSize() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByRoomsRoomSize(Size.LARGE);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByRoomsRoomCondition() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle("Family");
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle("Local");
+
+        LabelEntity label = new LabelEntity();
+        label.setTitle("Economy");
+
+        RoomEntity room = new RoomEntity();
+        RoomTypeEntity roomType = new RoomTypeEntity();
+        roomType.setTitle(Title.STANDARD_DBL);
+        roomTypeService.save(roomType);
+        room.setRoomType(roomType);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getLabels().add(label);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotelsByRoomsRoomCondition(RoomCondition.VERY_GOOD);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
     }
 }

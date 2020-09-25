@@ -4,6 +4,7 @@ import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.Size;
+import lt.sdacademy.famtrip.models.Title;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import org.springframework.data.repository.Repository;
 
@@ -39,7 +40,7 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByDistanceFromAirport(Double distanceFromAirport);
 
-    List<HotelEntity> findAllByAuthor(Long authorId);
+    List<HotelEntity> findAllByAuthorId(Long authorId);
 
     List<HotelEntity> findAllByCityCountryTitle(String title);
 
@@ -49,7 +50,7 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByCuisineTypesTitle(String title);
 
-    List<HotelEntity> findAllByRoomsType(String type);
+    List<HotelEntity> findAllByRoomsRoomTypeTitle(Title title);
 
     List<HotelEntity> findAllByRoomsRoomSize(Size roomSize);
 

@@ -4,6 +4,7 @@ import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.Size;
+import lt.sdacademy.famtrip.models.Title;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import lt.sdacademy.famtrip.repositories.HotelRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -76,8 +77,8 @@ public class HotelService {
         return hotelRepository.findAllByDistanceFromAirport(distanceFromAirport);
     }
 
-    public List<HotelEntity> getHotelsByAuthor(Long authorId) {
-        return hotelRepository.findAllByAuthor(authorId);
+    public List<HotelEntity> getHotelsByAuthorId(Long authorId) {
+        return hotelRepository.findAllByAuthorId(authorId);
     }
 
     public List<HotelEntity> getHotelsByCityCountryTitle(String title) {
@@ -96,8 +97,8 @@ public class HotelService {
         return hotelRepository.findAllByCuisineTypesTitle(title);
     }
 
-    public List<HotelEntity> getHotelsByRoomsType(String type) {
-        return hotelRepository.findAllByRoomsType(type);
+    public List<HotelEntity> getHotelsByRoomsTypeTitle(Title title) {
+        return hotelRepository.findAllByRoomsRoomTypeTitle(title);
     }
 
     public List<HotelEntity> getHotelsByRoomsRoomSize(Size roomSize) {
