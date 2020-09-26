@@ -1,21 +1,26 @@
 package lt.sdacademy.famtrip.models.entities;
 
+import lt.sdacademy.famtrip.models.HotelLabel;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "label")
-public class LabelEntity extends AbstractEntity {
+public class HotelLabelEntity extends AbstractEntity {
 
     @Column(name = "title", length = 50, nullable = false, unique = true)
-    private String title;
+    @Enumerated(EnumType.STRING)
+    private HotelLabel title;
 
-    public String getTitle() {
+    public HotelLabel getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(HotelLabel title) {
         this.title = title;
     }
 }

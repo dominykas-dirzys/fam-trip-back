@@ -1,7 +1,11 @@
 package lt.sdacademy.famtrip.models.entities;
 
+import lt.sdacademy.famtrip.models.CuisineType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Entity
@@ -9,13 +13,14 @@ import javax.persistence.Table;
 public class CuisineTypeEntity extends AbstractEntity{
 
     @Column(name = "title", unique = true, nullable = false)
-    private String title;
+    @Enumerated(EnumType.STRING)
+    private CuisineType title;
 
-    public String getTitle() {
+    public CuisineType getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(CuisineType title) {
         this.title = title;
     }
 }

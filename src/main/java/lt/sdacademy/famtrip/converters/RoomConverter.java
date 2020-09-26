@@ -30,7 +30,7 @@ public class RoomConverter {
         if (room.getId() == null) {
             result = new RoomEntity();
         } else {
-            result = roomRepository.findOneById(room.getId());
+            result = roomRepository.findById(room.getId());
         }
 
         result.setType(room.getType());

@@ -1,7 +1,10 @@
 package lt.sdacademy.famtrip.repositories;
 
+import lt.sdacademy.famtrip.models.CuisineType;
 import lt.sdacademy.famtrip.models.FoodQuality;
+import lt.sdacademy.famtrip.models.HotelLabel;
 import lt.sdacademy.famtrip.models.HotelRating;
+import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.RoomType;
 import lt.sdacademy.famtrip.models.Size;
@@ -44,11 +47,11 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByCityCountryTitle(String title);
 
-    List<HotelEntity> findAllByRecommendedTosTitle(String title);
+    List<HotelEntity> findAllByRecommendedTos(RecommendedTo recommendedTo);
 
-    List<HotelEntity> findAllByLabelsTitle(String title);
+    List<HotelEntity> findAllByHotelLabels(HotelLabel hotelLabel);
 
-    List<HotelEntity> findAllByCuisineTypesTitle(String title);
+    List<HotelEntity> findAllByCuisineTypes(CuisineType cuisineType);
 
     List<HotelEntity> findAllByRoomsRoomType(RoomType roomType);
 

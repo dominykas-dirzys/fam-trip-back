@@ -1,7 +1,10 @@
 package lt.sdacademy.famtrip.services;
 
+import lt.sdacademy.famtrip.models.CuisineType;
 import lt.sdacademy.famtrip.models.FoodQuality;
+import lt.sdacademy.famtrip.models.HotelLabel;
 import lt.sdacademy.famtrip.models.HotelRating;
+import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.Size;
 import lt.sdacademy.famtrip.models.RoomType;
@@ -84,16 +87,16 @@ public class HotelService {
         return hotelRepository.findAllByCityCountryTitle(title);
     }
 
-    public List<HotelEntity> getHotelsByRecommendedTosTitle(String recommendedToTitle) {
-        return hotelRepository.findAllByRecommendedTosTitle(recommendedToTitle);
+    public List<HotelEntity> getHotelsByRecommendedTos(RecommendedTo recommendedTo) {
+        return hotelRepository.findAllByRecommendedTos(recommendedTo);
     }
 
-    public List<HotelEntity> getHotelsByLabelsTitle(String title) {
-        return hotelRepository.findAllByLabelsTitle(title);
+    public List<HotelEntity> getHotelsByHotelLabels(HotelLabel hotelLabel) {
+        return hotelRepository.findAllByHotelLabels(hotelLabel);
     }
 
-    public List<HotelEntity> getHotelsByCuisineTypesTitle(String title) {
-        return hotelRepository.findAllByCuisineTypesTitle(title);
+    public List<HotelEntity> getHotelsByCuisineTypes(CuisineType cuisineType) {
+        return hotelRepository.findAllByCuisineTypes(cuisineType);
     }
 
     public List<HotelEntity> getHotelsByRoomsType(RoomType roomType) {

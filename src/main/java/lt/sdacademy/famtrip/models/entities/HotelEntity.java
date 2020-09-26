@@ -67,23 +67,29 @@ public class HotelEntity extends AbstractEntity {
     @JoinColumn(name = "author_id", nullable = false)
     private UserEntity author;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "hotel_recommended_to", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "recommended_to_id"))
-    private List<RecommendedToEntity> recommendedTos = new ArrayList<>();
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "hotel_cuisine_type", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "cuisine_type_id"))
-    private List<CuisineTypeEntity> cuisineTypes = new ArrayList<>();
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "hotel_label", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
-    private List<LabelEntity> labels = new ArrayList<>();
-
     @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
     @OrderBy(value = "id")
     private List<RoomEntity> rooms;
+
+    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @OrderBy(value = "id")
+    private List<RecommendedToEntity> recommendedTos;
+
+    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @OrderBy(value = "id")
+    private List<HotelLabelEntity> hotelLabels;
+
+    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @OrderBy(value = "id")
+    private List<CuisineTypeEntity> cuisineTypes;
 
     public String getName() {
         return name;
@@ -131,22 +137,6 @@ public class HotelEntity extends AbstractEntity {
 
     public void setTerritorySize(Size territorySize) {
         this.territorySize = territorySize;
-    }
-
-    public List<CuisineTypeEntity> getCuisineTypes() {
-        return cuisineTypes;
-    }
-
-    public void setCuisineTypes(List<CuisineTypeEntity> cuisineTypes) {
-        this.cuisineTypes = cuisineTypes;
-    }
-
-    public List<LabelEntity> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(List<LabelEntity> labels) {
-        this.labels = labels;
     }
 
     public boolean isWaterSlides() {
@@ -197,6 +187,14 @@ public class HotelEntity extends AbstractEntity {
         this.author = author;
     }
 
+    public List<RoomEntity> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<RoomEntity> rooms) {
+        this.rooms = rooms;
+    }
+
     public List<RecommendedToEntity> getRecommendedTos() {
         return recommendedTos;
     }
@@ -205,11 +203,19 @@ public class HotelEntity extends AbstractEntity {
         this.recommendedTos = recommendedTos;
     }
 
-    public List<RoomEntity> getRooms() {
-        return rooms;
+    public List<HotelLabelEntity> getHotelLabels() {
+        return hotelLabels;
     }
 
-    public void setRooms(List<RoomEntity> rooms) {
-        this.rooms = rooms;
+    public void setHotelLabels(List<HotelLabelEntity> hotelLabels) {
+        this.hotelLabels = hotelLabels;
+    }
+
+    public List<CuisineTypeEntity> getCuisineTypes() {
+        return cuisineTypes;
+    }
+
+    public void setCuisineTypes(List<CuisineTypeEntity> cuisineTypes) {
+        this.cuisineTypes = cuisineTypes;
     }
 }

@@ -1,6 +1,6 @@
 package lt.sdacademy.famtrip.services;
 
-import lt.sdacademy.famtrip.models.entities.LabelEntity;
+import lt.sdacademy.famtrip.models.entities.HotelLabelEntity;
 import lt.sdacademy.famtrip.repositories.LabelRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +15,19 @@ public class LabelService {
         this.labelRepository = labelRepository;
     }
 
-    public List<LabelEntity> getLabels() {
+    public List<HotelLabelEntity> getLabels() {
         return labelRepository.findAll();
     }
 
-    public LabelEntity save(LabelEntity labelEntity) {
-        return labelRepository.save(labelEntity);
+    public HotelLabelEntity save(HotelLabelEntity hotelLabelEntity) {
+        return labelRepository.save(hotelLabelEntity);
     }
 
-    public void delete(LabelEntity labelEntity) {
-        labelRepository.delete(labelEntity);
+    public void delete(HotelLabelEntity hotelLabelEntity) {
+        labelRepository.delete(hotelLabelEntity);
     }
 
-    public LabelEntity getLabelByTitle(String title) {
+    public HotelLabelEntity getLabelByTitle(String title) {
         return labelRepository.findOneByTitle(title);
     }
 }

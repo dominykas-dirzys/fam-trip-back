@@ -1,7 +1,11 @@
 package lt.sdacademy.famtrip.models.entities;
 
+import lt.sdacademy.famtrip.models.RecommendedTo;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Entity
@@ -9,13 +13,14 @@ import javax.persistence.Table;
 public class RecommendedToEntity extends AbstractEntity {
 
     @Column(name = "title", length = 50, nullable = false, unique = true)
-    private String title;
+    @Enumerated(EnumType.STRING)
+    private RecommendedTo title;
 
-    public String getTitle() {
+    public RecommendedTo getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(RecommendedTo title) {
         this.title = title;
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.data.repository.Repository;
 import java.util.List;
 
 public interface RoomRepository extends Repository<RoomEntity, Long> {
-    RoomEntity findOneById(Long id);
+    RoomEntity findById(Long id);
 
     List<RoomEntity> findAll();
 
