@@ -373,6 +373,6 @@ class RoomServiceTest {
         RoomEntity result = roomService.getById(room.getId());
 
         assertNotNull(result);
-        assertEquals(RoomType.STANDARD_DBL, result.getType());
+        assertEquals(RoomType.STANDARD_DBL, result.getRoomType());
     }
 }
