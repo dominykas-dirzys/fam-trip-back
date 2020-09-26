@@ -4,7 +4,7 @@ import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.Size;
-import lt.sdacademy.famtrip.models.Title;
+import lt.sdacademy.famtrip.models.RoomType;
 import lt.sdacademy.famtrip.models.entities.CityEntity;
 import lt.sdacademy.famtrip.models.entities.CountryEntity;
 import lt.sdacademy.famtrip.models.entities.CuisineTypeEntity;
@@ -12,7 +12,6 @@ import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import lt.sdacademy.famtrip.models.entities.LabelEntity;
 import lt.sdacademy.famtrip.models.entities.RecommendedToEntity;
 import lt.sdacademy.famtrip.models.entities.RoomEntity;
-import lt.sdacademy.famtrip.models.entities.RoomTypeEntity;
 import lt.sdacademy.famtrip.models.entities.UserEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +43,6 @@ class HotelServiceTest {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private RoomTypeService roomTypeService;
-
     @Test
     void getHotels() {
         CountryEntity country = new CountryEntity();
@@ -73,10 +69,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -136,10 +129,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -197,10 +187,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -260,10 +247,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -322,10 +306,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -386,10 +367,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -449,10 +427,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -512,10 +487,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -575,10 +547,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -638,10 +607,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -701,10 +667,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -764,10 +727,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -827,10 +787,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -890,10 +847,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -953,10 +907,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -1016,10 +967,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -1079,10 +1027,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -1142,10 +1087,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -1205,10 +1147,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -1243,7 +1182,7 @@ class HotelServiceTest {
     }
 
     @Test
-    void getHotelsByRoomsRoomTypeTitle() {
+    void getHotelsByRoomsRoomType() {
         CountryEntity country = new CountryEntity();
         country.setTitle("TestNation");
         countryService.save(country);
@@ -1268,10 +1207,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -1298,7 +1234,7 @@ class HotelServiceTest {
 
         hotelService.save(hotel);
 
-        List<HotelEntity> result = hotelService.getHotelsByRoomsTypeTitle(Title.STANDARD_DBL);
+        List<HotelEntity> result = hotelService.getHotelsByRoomsType(RoomType.STANDARD_DBL);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -1331,10 +1267,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -1394,10 +1327,7 @@ class HotelServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");

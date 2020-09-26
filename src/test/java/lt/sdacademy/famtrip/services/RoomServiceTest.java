@@ -3,8 +3,8 @@ package lt.sdacademy.famtrip.services;
 import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.RoomCondition;
+import lt.sdacademy.famtrip.models.RoomType;
 import lt.sdacademy.famtrip.models.Size;
-import lt.sdacademy.famtrip.models.Title;
 import lt.sdacademy.famtrip.models.entities.CityEntity;
 import lt.sdacademy.famtrip.models.entities.CountryEntity;
 import lt.sdacademy.famtrip.models.entities.CuisineTypeEntity;
@@ -12,7 +12,6 @@ import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import lt.sdacademy.famtrip.models.entities.LabelEntity;
 import lt.sdacademy.famtrip.models.entities.RecommendedToEntity;
 import lt.sdacademy.famtrip.models.entities.RoomEntity;
-import lt.sdacademy.famtrip.models.entities.RoomTypeEntity;
 import lt.sdacademy.famtrip.models.entities.UserEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +43,6 @@ class RoomServiceTest {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private RoomTypeService roomTypeService;
-
     @Test
     void getRooms() {
         CountryEntity country = new CountryEntity();
@@ -73,10 +69,7 @@ class RoomServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -105,7 +98,7 @@ class RoomServiceTest {
         List<RoomEntity> result = roomService.getRooms();
 
         assertEquals(1, result.size());
-        assertEquals(Title.STANDARD_DBL, result.get(0).getRoomType().getTitle());
+        assertEquals(RoomType.STANDARD_DBL, result.get(0).getRoomType());
         assertEquals("Very good room", result.get(0).getRemarks());
     }
 
@@ -135,10 +128,7 @@ class RoomServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -167,7 +157,7 @@ class RoomServiceTest {
         List<RoomEntity> result = roomService.getRoomsByRoomSize(Size.LARGE);
 
         assertEquals(1, result.size());
-        assertEquals(Title.STANDARD_DBL, result.get(0).getRoomType().getTitle());
+        assertEquals(RoomType.STANDARD_DBL, result.get(0).getRoomType());
         assertEquals("Very good room", result.get(0).getRemarks());
     }
 
@@ -197,10 +187,7 @@ class RoomServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -229,7 +216,7 @@ class RoomServiceTest {
         List<RoomEntity> result = roomService.getRoomsByRoomCondition(RoomCondition.VERY_GOOD);
 
         assertEquals(1, result.size());
-        assertEquals(Title.STANDARD_DBL, result.get(0).getRoomType().getTitle());
+        assertEquals(RoomType.STANDARD_DBL, result.get(0).getRoomType());
         assertEquals("Very good room", result.get(0).getRemarks());
     }
 
@@ -259,10 +246,7 @@ class RoomServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
@@ -289,7 +273,7 @@ class RoomServiceTest {
         hotelService.save(hotel);
 
         assertNotNull(room.getId());
-        assertEquals(Title.STANDARD_DBL, room.getRoomType().getTitle());
+        assertEquals(RoomType.STANDARD_DBL, room.getRoomType());
         assertEquals("Very good room", room.getRemarks());
     }
 
@@ -319,10 +303,7 @@ class RoomServiceTest {
         label.setTitle("Economy");
 
         RoomEntity room = new RoomEntity();
-        RoomTypeEntity roomType = new RoomTypeEntity();
-        roomType.setTitle(Title.STANDARD_DBL);
-        roomTypeService.save(roomType);
-        room.setRoomType(roomType);
+        room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");

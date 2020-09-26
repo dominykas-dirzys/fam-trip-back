@@ -3,8 +3,8 @@ package lt.sdacademy.famtrip.repositories;
 import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.RoomCondition;
+import lt.sdacademy.famtrip.models.RoomType;
 import lt.sdacademy.famtrip.models.Size;
-import lt.sdacademy.famtrip.models.Title;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import org.springframework.data.repository.Repository;
 
@@ -50,7 +50,7 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByCuisineTypesTitle(String title);
 
-    List<HotelEntity> findAllByRoomsRoomTypeTitle(Title title);
+    List<HotelEntity> findAllByRoomsRoomType(RoomType roomType);
 
     List<HotelEntity> findAllByRoomsRoomSize(Size roomSize);
 

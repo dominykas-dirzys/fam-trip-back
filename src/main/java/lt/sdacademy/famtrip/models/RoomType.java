@@ -1,6 +1,6 @@
 package lt.sdacademy.famtrip.models;
 
-public enum Title {
+public enum RoomType {
 
     PROMO,
     STANDARD_DBL,

@@ -1,15 +1,13 @@
 package lt.sdacademy.famtrip.models.entities;
 
 import lt.sdacademy.famtrip.models.RoomCondition;
+import lt.sdacademy.famtrip.models.RoomType;
 import lt.sdacademy.famtrip.models.Size;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,9 +17,9 @@ public class RoomEntity extends AbstractEntity {
     @Column(name = "type", length = 50, unique = true)
     private String type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_type_id", nullable = false)
-    private RoomTypeEntity roomType;
+    @Column(name = "room_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RoomType roomType;
 
     @Column(name = "size", length = 50)
     @Enumerated(EnumType.STRING)
@@ -42,11 +40,11 @@ public class RoomEntity extends AbstractEntity {
         this.type = type;
     }
 
-    public RoomTypeEntity getRoomType() {
+    public RoomType getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(RoomTypeEntity roomType) {
+    public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
     }
 
