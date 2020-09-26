@@ -82,7 +82,7 @@ create table hotel_label
     hotel_id bigint unsigned not null,
     constraint fk_hotel_label_hotel foreign key (hotel_id) references hotel (id),
     label_id bigint unsigned not null,
-    constraint fk_hotel_label_label foreign key (hotel_id) references label (id)
+    constraint fk_hotel_label_label foreign key (label_id) references label (id)
 );
 
 create table cuisine_type
