@@ -1,8 +1,29 @@
 package lt.sdacademy.famtrip.services;
 
+import lt.sdacademy.famtrip.models.CuisineType;
+import lt.sdacademy.famtrip.models.FoodQuality;
+import lt.sdacademy.famtrip.models.HotelLabel;
+import lt.sdacademy.famtrip.models.HotelRating;
+import lt.sdacademy.famtrip.models.RecommendedTo;
+import lt.sdacademy.famtrip.models.RoomCondition;
+import lt.sdacademy.famtrip.models.RoomType;
+import lt.sdacademy.famtrip.models.Size;
+import lt.sdacademy.famtrip.models.entities.CityEntity;
+import lt.sdacademy.famtrip.models.entities.CountryEntity;
+import lt.sdacademy.famtrip.models.entities.CuisineTypeEntity;
+import lt.sdacademy.famtrip.models.entities.HotelEntity;
+import lt.sdacademy.famtrip.models.entities.HotelLabelEntity;
+import lt.sdacademy.famtrip.models.entities.RecommendedToEntity;
+import lt.sdacademy.famtrip.models.entities.RoomEntity;
+import lt.sdacademy.famtrip.models.entities.UserEntity;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -11,81 +32,81 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Transactional
 class HotelServiceTest {
 
-//    @Autowired
-//    private HotelService hotelService;
-//
-//    @Autowired
-//    private CountryService countryService;
-//
-//    @Autowired
-//    private CityService cityService;
-//
-//    @Autowired
-//    private RoomService roomService;
-//
-//    @Autowired
-//    private UserService userService;
-//
-//    @Test
-//    void getHotels() {
-//        CountryEntity country = new CountryEntity();
-//        country.setTitle("TestNation");
-//        countryService.save(country);
-//
-//        CityEntity city = new CityEntity();
-//        city.setTitle("TestCity");
-//        city.setCountry(country);
-//        cityService.save(city);
-//
-//        UserEntity user = new UserEntity();
-//        user.setEmail("user@web.com");
-//        user.setPassword("password");
-//        userService.save(user);
-//
-//        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
-//
-//        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
-//
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
-//
-//        RoomEntity room = new RoomEntity();
-//        room.setRoomType(RoomType.STANDARD_DBL);
-//        room.setRoomSize(Size.LARGE);
-//        room.setRoomCondition(RoomCondition.VERY_GOOD);
-//        room.setRemarks("Very good room");
-//
-//        HotelEntity hotel = new HotelEntity();
-//        hotel.setName("Test Hotel");
-//        hotel.setCity(city);
-//        hotel.setOfficialRating(HotelRating.FIVE_STAR);
-//        hotel.setInspectionScore((byte) 10);
-//        hotel.setFoodQuality(FoodQuality.FANTASTIC);
-//        hotel.setTerritorySize(Size.LARGE);
-//        hotel.setWaterSlides(true);
-//        hotel.setSpa(true);
-//        hotel.setDistanceToBeach(500);
-//        hotel.setDistanceFromAirport(10.0);
-//        hotel.setRemarks("Wonderful hotel");
-//        hotel.setAuthor(user);
-//        hotel.getRecommendedTos().add(recommendedTo);
-//        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
-//        List<RoomEntity> rooms = new ArrayList<>();
-//        rooms.add(room);
-//        hotel.setRooms(rooms);
-//
-//        hotelService.save(hotel);
-//
-//        List<HotelEntity> result = hotelService.getHotels();
-//
-//        assertEquals(1, result.size());
-//        assertEquals("Test Hotel", result.get(0).getName());
-//        assertEquals(HotelRating.FIVE_STAR, result.get(0).getOfficialRating());
-//    }
-//
+    @Autowired
+    private HotelService hotelService;
+
+    @Autowired
+    private CountryService countryService;
+
+    @Autowired
+    private CityService cityService;
+
+    @Autowired
+    private RoomService roomService;
+
+    @Autowired
+    private UserService userService;
+
+    @Test
+    void getHotels() {
+        CountryEntity country = new CountryEntity();
+        country.setTitle("TestNation");
+        countryService.save(country);
+
+        CityEntity city = new CityEntity();
+        city.setTitle("TestCity");
+        city.setCountry(country);
+        cityService.save(city);
+
+        UserEntity user = new UserEntity();
+        user.setEmail("user@web.com");
+        user.setPassword("password");
+        userService.save(user);
+
+        RecommendedToEntity recommendedTo = new RecommendedToEntity();
+        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
+
+        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
+        cuisineType.setTitle(CuisineType.LOCAL);
+
+        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+        hotelLabel.setTitle(HotelLabel.ECONOMY);
+
+        RoomEntity room = new RoomEntity();
+        room.setRoomType(RoomType.STANDARD_DBL);
+        room.setRoomSize(Size.LARGE);
+        room.setRoomCondition(RoomCondition.VERY_GOOD);
+        room.setRemarks("Very good room");
+
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName("Test Hotel");
+        hotel.setCity(city);
+        hotel.setOfficialRating(HotelRating.FIVE_STAR);
+        hotel.setInspectionScore((byte) 10);
+        hotel.setFoodQuality(FoodQuality.FANTASTIC);
+        hotel.setTerritorySize(Size.LARGE);
+        hotel.setWaterSlides(true);
+        hotel.setSpa(true);
+        hotel.setDistanceToBeach(500);
+        hotel.setDistanceFromAirport(10.0);
+        hotel.setRemarks("Wonderful hotel");
+        hotel.setAuthor(user);
+        hotel.getRecommendedTos().add(recommendedTo);
+        hotel.getCuisineTypes().add(cuisineType);
+        hotel.getHotelLabels().add(hotelLabel);
+        List<RoomEntity> rooms = new ArrayList<>();
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        hotelService.save(hotel);
+
+        List<HotelEntity> result = hotelService.getHotels();
+
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+        assertEquals(HotelRating.FIVE_STAR, result.get(0).getOfficialRating());
+    }
+
 //    @Test
 //    void save() {
 //        CountryEntity country = new CountryEntity();
@@ -103,13 +124,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -132,7 +153,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -161,13 +182,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -190,7 +211,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -221,13 +242,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -250,7 +271,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -280,13 +301,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -309,7 +330,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -341,13 +362,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -370,7 +391,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -401,13 +422,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -430,7 +451,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -461,13 +482,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -490,7 +511,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -521,13 +542,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -550,7 +571,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -581,13 +602,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -610,7 +631,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -641,13 +662,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -670,7 +691,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -701,13 +722,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -730,7 +751,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -761,13 +782,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -790,7 +811,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -821,13 +842,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -850,7 +871,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -881,13 +902,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -910,7 +931,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -941,13 +962,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -970,7 +991,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -1001,13 +1022,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -1030,14 +1051,14 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
 //
 //        hotelService.save(hotel);
 //
-//        List<HotelEntity> result = hotelService.getHotelsByRecommendedTosTitle("Family");
+//        List<HotelEntity> result = hotelService.getHotelsByRecommendedTos(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        assertNotNull(result);
 //        assertEquals(1, result.size());
@@ -1061,13 +1082,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -1090,14 +1111,14 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
 //
 //        hotelService.save(hotel);
 //
-//        List<HotelEntity> result = hotelService.getHotelsByLabelsTitle("Economy");
+//        List<HotelEntity> result = hotelService.getHotelsByHotelLabels(HotelLabel.ECONOMY);
 //
 //        assertNotNull(result);
 //        assertEquals(1, result.size());
@@ -1121,13 +1142,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -1150,14 +1171,14 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
 //
 //        hotelService.save(hotel);
 //
-//        List<HotelEntity> result = hotelService.getHotelsByCuisineTypesTitle("Local");
+//        List<HotelEntity> result = hotelService.getHotelsByCuisineTypes(CuisineType.LOCAL);
 //
 //        assertNotNull(result);
 //        assertEquals(1, result.size());
@@ -1181,13 +1202,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -1210,7 +1231,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -1241,13 +1262,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -1270,7 +1291,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);
@@ -1301,13 +1322,13 @@ class HotelServiceTest {
 //        userService.save(user);
 //
 //        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-//        recommendedTo.setTitle("Family");
+//        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 //
 //        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-//        cuisineType.setTitle("Local");
+//        cuisineType.setTitle(CuisineType.LOCAL);
 //
-//        LabelEntity label = new LabelEntity();
-//        label.setTitle("Economy");
+//        HotelLabelEntity hotelLabel = new HotelLabelEntity();
+//        hotelLabel.setTitle(HotelLabel.ECONOMY);
 //
 //        RoomEntity room = new RoomEntity();
 //        room.setRoomType(RoomType.STANDARD_DBL);
@@ -1330,7 +1351,7 @@ class HotelServiceTest {
 //        hotel.setAuthor(user);
 //        hotel.getRecommendedTos().add(recommendedTo);
 //        hotel.getCuisineTypes().add(cuisineType);
-//        hotel.getLabels().add(label);
+//        hotel.getHotelLabels().add(hotelLabel);
 //        List<RoomEntity> rooms = new ArrayList<>();
 //        rooms.add(room);
 //        hotel.setRooms(rooms);

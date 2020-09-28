@@ -346,6 +346,7 @@ class RoomServiceTest {
         user.setEmail("user@web.com");
         user.setPassword("password");
         userService.save(user);
+
         RoomEntity room = new RoomEntity();
         room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
@@ -365,6 +366,7 @@ class RoomServiceTest {
         hotel.setDistanceFromAirport(10.0);
         hotel.setRemarks("Wonderful hotel");
         hotel.setAuthor(user);
+
         List<RoomEntity> rooms = new ArrayList<>();
         rooms.add(room);
         hotel.setRooms(rooms);
