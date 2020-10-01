@@ -1,5 +1,6 @@
 package lt.sdacademy.famtrip.services;
 
+import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.entities.RecommendedToEntity;
 import lt.sdacademy.famtrip.repositories.RecommendedToRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class RecommendedToService {
         recommendedToRepository.delete(recommendedToEntity);
     }
 
-    public RecommendedToEntity getRecommendedToByTitle(String title) {
-        return recommendedToRepository.findOneByTitle(title);
+    public RecommendedToEntity getRecommendedToByTitle(RecommendedTo title) {
+        return recommendedToRepository.findByTitle(title);
     }
 }

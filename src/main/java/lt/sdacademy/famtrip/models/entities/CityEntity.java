@@ -34,7 +34,3 @@ public class CityEntity extends AbstractEntity {
         this.country = country;
     }
 }
-
-
-
-

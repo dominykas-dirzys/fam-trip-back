@@ -6,7 +6,6 @@ import lt.sdacademy.famtrip.models.HotelLabel;
 import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.RoomCondition;
-import lt.sdacademy.famtrip.models.RoomType;
 import lt.sdacademy.famtrip.models.Size;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import org.springframework.data.repository.Repository;
@@ -21,7 +20,7 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     void delete(HotelEntity hotelEntity);
 
-    HotelEntity findOneByName(String name);
+    HotelEntity findByName(String name);
 
     List<HotelEntity> findAllByNameContains(String name);
 
@@ -47,13 +46,11 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByCityCountryTitle(String title);
 
-    List<HotelEntity> findAllByRecommendedTos(RecommendedTo recommendedTo);
-
-    List<HotelEntity> findAllByHotelLabels(HotelLabel hotelLabel);
-
-    List<HotelEntity> findAllByCuisineTypes(CuisineType cuisineType);
-
-    List<HotelEntity> findAllByRoomsRoomType(RoomType roomType);
+//    List<HotelEntity> findAllByRecommendedTos(RecommendedTo recommendedTo);
+//
+//    List<HotelEntity> findAllByLabel(HotelLabel hotelLabel);
+//
+//    List<HotelEntity> findAllByCuisineType(CuisineType cuisineType);
 
     List<HotelEntity> findAllByRoomsRoomSize(Size roomSize);
 

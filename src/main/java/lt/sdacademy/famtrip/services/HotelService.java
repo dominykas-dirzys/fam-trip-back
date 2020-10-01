@@ -7,7 +7,6 @@ import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.Size;
-import lt.sdacademy.famtrip.models.RoomType;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import lt.sdacademy.famtrip.repositories.HotelRepository;
 import org.springframework.stereotype.Service;
@@ -36,7 +35,7 @@ public class HotelService {
     }
 
     public HotelEntity getHotelByName(String name) {
-        return hotelRepository.findOneByName(name);
+        return hotelRepository.findByName(name);
     }
 
     public List<HotelEntity> getHotelsByNameContains(String name) {
@@ -87,21 +86,17 @@ public class HotelService {
         return hotelRepository.findAllByCityCountryTitle(title);
     }
 
-    public List<HotelEntity> getHotelsByRecommendedTos(RecommendedTo recommendedTo) {
-        return hotelRepository.findAllByRecommendedTos(recommendedTo);
-    }
-
-    public List<HotelEntity> getHotelsByHotelLabels(HotelLabel hotelLabel) {
-        return hotelRepository.findAllByHotelLabels(hotelLabel);
-    }
-
-    public List<HotelEntity> getHotelsByCuisineTypes(CuisineType cuisineType) {
-        return hotelRepository.findAllByCuisineTypes(cuisineType);
-    }
-
-    public List<HotelEntity> getHotelsByRoomsType(RoomType roomType) {
-        return hotelRepository.findAllByRoomsRoomType(roomType);
-    }
+//    public List<HotelEntity> getHotelsByRecommendedTo(RecommendedTo recommendedTo) {
+//        return hotelRepository.findAllByRecommendedTo(recommendedTo);
+//    }
+//
+//    public List<HotelEntity> getHotelsByLabel(HotelLabel hotelLabel) {
+//        return hotelRepository.findAllByLabel(hotelLabel);
+//    }
+//
+//    public List<HotelEntity> getHotelsByCuisineType(CuisineType cuisineType) {
+//        return hotelRepository.findAllByCuisineType(cuisineType);
+//    }
 
     public List<HotelEntity> getHotelsByRoomsRoomSize(Size roomSize) {
         return hotelRepository.findAllByRoomsRoomSize(roomSize);

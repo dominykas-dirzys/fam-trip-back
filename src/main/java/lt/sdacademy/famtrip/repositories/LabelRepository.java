@@ -1,20 +1,18 @@
 package lt.sdacademy.famtrip.repositories;
 
 import lt.sdacademy.famtrip.models.HotelLabel;
-import lt.sdacademy.famtrip.models.entities.HotelLabelEntity;
+import lt.sdacademy.famtrip.models.entities.LabelEntity;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
 
-public interface LabelRepository extends Repository<HotelLabelEntity, Long> {
+public interface LabelRepository extends Repository<LabelEntity, Long> {
 
-    List<HotelLabelEntity> findAll();
+    List<LabelEntity> findAll();
 
-    HotelLabelEntity save(HotelLabelEntity hotelLabelEntity);
+    LabelEntity save(LabelEntity hotelLabelEntity);
 
-    void delete(HotelLabelEntity hotelLabelEntity);
+    void delete(LabelEntity hotelLabelEntity);
 
-    HotelLabelEntity findByTitle(HotelLabel label);
-
-    List<HotelLabelEntity> findAllByTitle(HotelLabel label);
+    LabelEntity findByTitle(HotelLabel label);
 }

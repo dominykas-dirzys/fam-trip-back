@@ -1,6 +1,7 @@
 package lt.sdacademy.famtrip.services;
 
 import lt.sdacademy.famtrip.models.entities.UserEntity;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,13 +19,16 @@ class UserServiceTest {
     @Autowired
     private UserService userService;
 
-    @Test
-    void getUsers() {
+    @BeforeEach
+    void setup() {
         UserEntity user = new UserEntity();
         user.setEmail("user@web.com");
         user.setPassword("password");
         userService.save(user);
+    }
 
+    @Test
+    void getUsers() {
         List<UserEntity> result = userService.getUsers();
 
         assertEquals(1, result.size());
@@ -34,22 +38,12 @@ class UserServiceTest {
 
     @Test
     void save() {
-        UserEntity user = new UserEntity();
-        user.setEmail("user@web.com");
-        user.setPassword("password");
-        userService.save(user);
-
-        assertNotNull(user.getId());
-        assertEquals("user@web.com", user.getEmail());
+        assertNotNull(userService.getUsers().get(0).getId());
+        assertEquals("user@web.com", userService.getUsers().get(0).getEmail());
     }
 
     @Test
     void delete() {
-        UserEntity user = new UserEntity();
-        user.setEmail("user@web.com");
-        user.setPassword("password");
-        userService.save(user);
-
         List<UserEntity> users = userService.getUsers();
         int oldSize = users.size();
         userService.delete(users.get(0));
@@ -61,25 +55,25 @@ class UserServiceTest {
     @Test
     void getUserById() {
         UserEntity user = new UserEntity();
-        user.setEmail("user@web.com");
+        user.setEmail("user2@web.com");
         user.setPassword("password");
         userService.save(user);
 
         UserEntity result = userService.getUserById(user.getId());
 
         assertNotNull(result);
-        assertEquals("user@web.com", result.getEmail());
+        assertEquals("user2@web.com", result.getEmail());
         assertEquals("password", result.getPassword());
     }
 
     @Test
     void getUserByEmail() {
         UserEntity user = new UserEntity();
-        user.setEmail("user@web.com");
+        user.setEmail("user2@web.com");
         user.setPassword("password");
         userService.save(user);
 
-        UserEntity result = userService.getUserByEmail("user@web.com");
+        UserEntity result = userService.getUserByEmail("user2@web.com");
 
         assertNotNull(result);
         assertEquals(user.getId(), result.getId());

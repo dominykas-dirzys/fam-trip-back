@@ -15,5 +15,5 @@ public interface UserRepository extends Repository<UserEntity, Long> {
 
     UserEntity findOneById(Long id);
 
-    UserEntity findOneByEmail(String email);
+    UserEntity findByEmail(String email);
 }

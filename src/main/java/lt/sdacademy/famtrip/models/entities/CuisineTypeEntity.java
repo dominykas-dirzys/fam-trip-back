@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cuisine_type")
-public class CuisineTypeEntity extends AbstractEntity{
+public class CuisineTypeEntity extends AbstractEntity {
 
     @Column(name = "title", unique = true, nullable = false)
     @Enumerated(EnumType.STRING)

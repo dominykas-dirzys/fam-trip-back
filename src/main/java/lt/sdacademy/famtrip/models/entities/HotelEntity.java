@@ -73,23 +73,39 @@ public class HotelEntity extends AbstractEntity {
     @OrderBy(value = "id")
     private List<RoomEntity> rooms;
 
-    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @OrderBy(value = "id")
+//    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @Fetch(value = FetchMode.SUBSELECT)
+//    @OrderBy(value = "id")
+//    private List<RecommendedToEntity> recommendedTos;
+
+    @JoinTable(name = "hotel_recommended_to", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "recommended_to_id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
     private List<RecommendedToEntity> recommendedTos;
 
-    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @OrderBy(value = "id")
-    private List<HotelLabelEntity> hotelLabels;
+    @JoinTable(name = "hotel_label", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<LabelEntity> labels;
 
-    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @OrderBy(value = "id")
+//    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @Fetch(value = FetchMode.SUBSELECT)
+//    @OrderBy(value = "id")
+//    private List<HotelLabelEntity> hotelLabels;
+
+    @JoinTable(name = "hotel_cuisine_type", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "cuisine_type_id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
     private List<CuisineTypeEntity> cuisineTypes;
+
+//    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @Fetch(value = FetchMode.SUBSELECT)
+//    @OrderBy(value = "id")
+//    private List<CuisineTypeEntity> cuisineTypes;
+
 
     public String getName() {
         return name;
@@ -203,12 +219,12 @@ public class HotelEntity extends AbstractEntity {
         this.recommendedTos = recommendedTos;
     }
 
-    public List<HotelLabelEntity> getHotelLabels() {
-        return hotelLabels;
+    public List<LabelEntity> getLabels() {
+        return labels;
     }
 
-    public void setHotelLabels(List<HotelLabelEntity> hotelLabels) {
-        this.hotelLabels = hotelLabels;
+    public void setLabels(List<LabelEntity> labels) {
+        this.labels = labels;
     }
 
     public List<CuisineTypeEntity> getCuisineTypes() {

@@ -19,6 +19,24 @@ create table city
     constraint fk_hotel_country foreign key (country_id) references country (id)
 );
 
+create table label
+(
+    id       bigint unsigned auto_increment primary key,
+    title    varchar(50) unique not null
+);
+
+create table cuisine_type
+(
+    id       bigint unsigned auto_increment primary key,
+    title    varchar(50) unique not null
+);
+
+create table recommended_to
+(
+    id       bigint unsigned auto_increment primary key,
+    title    varchar(50) unique not null
+);
+
 create table hotel
 (
     id                    bigint unsigned auto_increment primary key,
@@ -38,28 +56,28 @@ create table hotel
     constraint fk_hotel_user foreign key (author_id) references user (id)
 );
 
-create table recommended_to
+create table hotel_label
 (
-    id       bigint unsigned auto_increment primary key,
-    title    varchar(50) unique not null,
-    hotel_id bigint unsigned    not null,
-    constraint fk_recommended_to_hotel foreign key (hotel_id) references hotel (id)
+    hotel_id bigint unsigned not null,
+    constraint fk_hotel_label_hotel foreign key (hotel_id) references hotel (id),
+    label_id bigint unsigned not null,
+    constraint fk_hotel_label_label foreign key (label_id) references label (id)
 );
 
-create table label
+create table hotel_cuisine_type
 (
-    id       bigint unsigned auto_increment primary key,
-    title    varchar(50) unique not null,
-    hotel_id bigint unsigned    not null,
-    constraint fk_label_hotel foreign key (hotel_id) references hotel (id)
+    hotel_id bigint unsigned not null,
+    constraint fk_hotel_cuisine_type_hotel foreign key (hotel_id) references hotel (id),
+    cuisine_type_id bigint unsigned not null,
+    constraint fk_hotel_cuisine_type_cuisine_type foreign key (cuisine_type_id) references cuisine_type (id)
 );
 
-create table cuisine_type
+create table hotel_recommended_to
 (
-    id       bigint unsigned auto_increment primary key,
-    title    varchar(50) unique not null,
-    hotel_id bigint unsigned    not null,
-    constraint fk_cuisine_type_hotel foreign key (hotel_id) references hotel (id)
+    hotel_id bigint unsigned not null,
+    constraint fk_hotel_recommended_to_hotel foreign key (hotel_id) references hotel (id),
+    recommended_to_id bigint unsigned not null,
+    constraint fk_hotel_recommended_to_recommended_to foreign key (recommended_to_id) references recommended_to (id)
 );
 
 create table room

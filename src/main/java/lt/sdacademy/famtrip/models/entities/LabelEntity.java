@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "label")
-public class HotelLabelEntity extends AbstractEntity {
+public class LabelEntity extends AbstractEntity {
 
     @Column(name = "title", length = 50, nullable = false, unique = true)
     @Enumerated(EnumType.STRING)

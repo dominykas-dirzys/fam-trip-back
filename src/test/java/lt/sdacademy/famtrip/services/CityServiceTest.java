@@ -2,6 +2,7 @@ package lt.sdacademy.famtrip.services;
 
 import lt.sdacademy.famtrip.models.entities.CityEntity;
 import lt.sdacademy.famtrip.models.entities.CountryEntity;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,8 +23,8 @@ class CityServiceTest {
     @Autowired
     private CountryService countryService;
 
-    @Test
-    void getCities() {
+    @BeforeEach
+    void setup() {
         CountryEntity country = new CountryEntity();
         country.setTitle("TestNation");
         countryService.save(country);
@@ -32,7 +33,10 @@ class CityServiceTest {
         city.setTitle("TestCity");
         city.setCountry(country);
         cityService.save(city);
+    }
 
+    @Test
+    void getCities() {
         List<CityEntity> result = cityService.getCities();
 
         assertEquals(1, result.size());
@@ -41,15 +45,6 @@ class CityServiceTest {
 
     @Test
     void getCitiesByTitle() {
-        CountryEntity country = new CountryEntity();
-        country.setTitle("TestNation");
-        countryService.save(country);
-
-        CityEntity city = new CityEntity();
-        city.setTitle("TestCity");
-        city.setCountry(country);
-        cityService.save(city);
-
         List<CityEntity> result = cityService.getCitiesByTitle("TestCity");
 
         assertEquals(1, result.size());
@@ -58,15 +53,6 @@ class CityServiceTest {
 
     @Test
     void getCitiesByCountryTitle() {
-        CountryEntity country = new CountryEntity();
-        country.setTitle("TestNation");
-        countryService.save(country);
-
-        CityEntity city = new CityEntity();
-        city.setTitle("TestCity");
-        city.setCountry(country);
-        cityService.save(city);
-
         List<CityEntity> result = cityService.getCitiesByCountryTitle("TestNation");
 
         assertEquals(1, result.size());
@@ -75,31 +61,13 @@ class CityServiceTest {
 
     @Test
     void save() {
-        CountryEntity country = new CountryEntity();
-        country.setTitle("TestNation");
-        countryService.save(country);
-
-        CityEntity city = new CityEntity();
-        city.setTitle("TestCity");
-        city.setCountry(country);
-        cityService.save(city);
-
-        assertNotNull(city.getId());
-        assertEquals("TestCity", city.getTitle());
-        assertEquals("TestNation", city.getCountry().getTitle());
+        assertNotNull(cityService.getCities().get(0).getId());
+        assertEquals("TestCity", cityService.getCities().get(0).getTitle());
+        assertEquals("TestNation", cityService.getCities().get(0).getCountry().getTitle());
     }
 
     @Test
     void delete() {
-        CountryEntity country = new CountryEntity();
-        country.setTitle("TestNation");
-        countryService.save(country);
-
-        CityEntity city = new CityEntity();
-        city.setTitle("TestCity");
-        city.setCountry(country);
-        cityService.save(city);
-
         List<CityEntity> cities = cityService.getCities();
         int oldSize = cities.size();
         cityService.delete(cities.get(0));

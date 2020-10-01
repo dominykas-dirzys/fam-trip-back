@@ -1,5 +1,6 @@
 package lt.sdacademy.famtrip.repositories;
 
+import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.entities.RecommendedToEntity;
 import org.springframework.data.repository.Repository;
 
@@ -13,5 +14,5 @@ public interface RecommendedToRepository extends Repository<RecommendedToEntity,
 
     void delete(RecommendedToEntity recommendedToEntity);
 
-    RecommendedToEntity findOneByTitle(String title);
+    RecommendedToEntity findByTitle(RecommendedTo title);
 }
