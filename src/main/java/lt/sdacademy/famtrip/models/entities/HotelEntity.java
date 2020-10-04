@@ -19,7 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -73,12 +72,6 @@ public class HotelEntity extends AbstractEntity {
     @OrderBy(value = "id")
     private List<RoomEntity> rooms;
 
-//    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//    @Fetch(value = FetchMode.SUBSELECT)
-//    @OrderBy(value = "id")
-//    private List<RecommendedToEntity> recommendedTos;
-
     @JoinTable(name = "hotel_recommended_to", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "recommended_to_id"))
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
@@ -89,23 +82,10 @@ public class HotelEntity extends AbstractEntity {
     @Fetch(FetchMode.SUBSELECT)
     private List<LabelEntity> labels;
 
-//    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//    @Fetch(value = FetchMode.SUBSELECT)
-//    @OrderBy(value = "id")
-//    private List<HotelLabelEntity> hotelLabels;
-
     @JoinTable(name = "hotel_cuisine_type", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "cuisine_type_id"))
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private List<CuisineTypeEntity> cuisineTypes;
-
-//    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//    @Fetch(value = FetchMode.SUBSELECT)
-//    @OrderBy(value = "id")
-//    private List<CuisineTypeEntity> cuisineTypes;
-
 
     public String getName() {
         return name;

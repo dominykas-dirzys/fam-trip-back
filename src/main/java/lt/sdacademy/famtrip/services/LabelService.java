@@ -31,5 +31,4 @@ public class LabelService {
     public LabelEntity getLabelByTitle(HotelLabel label) {
         return labelRepository.findByTitle(label);
     }
-
 }

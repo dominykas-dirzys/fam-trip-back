@@ -86,17 +86,17 @@ public class HotelService {
         return hotelRepository.findAllByCityCountryTitle(title);
     }
 
-//    public List<HotelEntity> getHotelsByRecommendedTo(RecommendedTo recommendedTo) {
-//        return hotelRepository.findAllByRecommendedTo(recommendedTo);
-//    }
-//
-//    public List<HotelEntity> getHotelsByLabel(HotelLabel hotelLabel) {
-//        return hotelRepository.findAllByLabel(hotelLabel);
-//    }
-//
-//    public List<HotelEntity> getHotelsByCuisineType(CuisineType cuisineType) {
-//        return hotelRepository.findAllByCuisineType(cuisineType);
-//    }
+    public List<HotelEntity> getHotelsByRecommendedTo(RecommendedTo recommendedTo) {
+        return hotelRepository.findAllByRecommendedTo(recommendedTo);
+    }
+
+    public List<HotelEntity> getHotelsByLabel(HotelLabel hotelLabel) {
+        return hotelRepository.findAllByLabel(hotelLabel);
+    }
+
+    public List<HotelEntity> getHotelsByCuisineType(CuisineType cuisineType) {
+        return hotelRepository.findAllByCuisineType(cuisineType);
+    }
 
     public List<HotelEntity> getHotelsByRoomsRoomSize(Size roomSize) {
         return hotelRepository.findAllByRoomsRoomSize(roomSize);

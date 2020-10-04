@@ -81,6 +81,7 @@ class RoomServiceTest {
         rooms.add(room);
         hotel.setRooms(rooms);
         hotelService.save(hotel);
+        roomService.save(room);
     }
 
     @Test
@@ -116,7 +117,7 @@ class RoomServiceTest {
     }
 
     @Test
-    void delete() {
+    void deleteMustFailBecauseTestIsTransactional() {
         List<RoomEntity> foundRooms = roomService.getRooms();
         int oldSize = foundRooms.size();
         roomService.delete(foundRooms.get(0));

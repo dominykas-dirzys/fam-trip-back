@@ -22,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +46,15 @@ class HotelServiceTest {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LabelService labelService;
+
+    @Autowired
+    private RecommendedToService recommendedToService;
+
+    @Autowired
+    private CuisineTypeService cuisineTypeService;
 
     @BeforeEach
     void setup() {
@@ -96,22 +104,24 @@ class HotelServiceTest {
         List<RecommendedToEntity> recommendedTos = new ArrayList<>();
         recommendedTos.add(recommendedTo);
         hotel.setRecommendedTos(recommendedTos);
-//
-//        List<CuisineTypeEntity> cuisineTypes = new ArrayList<>();
-//        cuisineTypes.add(cuisineType);
-//        hotel.setCuisineTypes(cuisineTypes);
-//
-//        List<LabelEntity> labels = new ArrayList<>();
-//        labels.add(label);
-//        hotel.setLabels(labels);
+
+        List<CuisineTypeEntity> cuisineTypes = new ArrayList<>();
+        cuisineTypes.add(cuisineType);
+        hotel.setCuisineTypes(cuisineTypes);
+
+        List<LabelEntity> labels = new ArrayList<>();
+        labels.add(label);
+        hotel.setLabels(labels);
 
         List<RoomEntity> rooms = new ArrayList<>();
         rooms.add(room);
         hotel.setRooms(rooms);
 
         hotelService.save(hotel);
+        labelService.save(label);
+        recommendedToService.save(recommendedTo);
+        cuisineTypeService.save(cuisineType);
     }
-
 
     @Test
     void getHotels() {
@@ -238,7 +248,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByAuthorId() {
-        List<HotelEntity> result = hotelService.getHotelsByAuthorId(hotelService.getHotels().get(0).getId());
+        List<HotelEntity> result = hotelService.getHotelsByAuthorId(hotelService.getHotels().get(0).getAuthor().getId());
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -253,33 +263,34 @@ class HotelServiceTest {
         assertEquals(1, result.size());
         assertEquals("TestNation", result.get(0).getCity().getCountry().getTitle());
     }
-//
-//    @Test
-//    void getHotelsByRecommendedTosTitle() {
-//        List<HotelEntity> result = hotelService.getHotelsByRecommendedTos(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
-//
-//        assertNotNull(result);
-//        assertEquals(1, result.size());
-//        assertEquals("Test Hotel", result.get(0).getName());
-//    }
-//
-//    @Test
-//    void getHotelsByLabelsTitle() {
-//        List<HotelEntity> result = hotelService.getHotelsByHotelLabels(HotelLabel.ECONOMY);
-//
-//        assertNotNull(result);
-//        assertEquals(1, result.size());
-//        assertEquals("Test Hotel", result.get(0).getName());
-//    }
-//
-//    @Test
-//    void getHotelsByCuisineTypesTitle() {
-//        List<HotelEntity> result = hotelService.getHotelsByCuisineTypes(CuisineType.LOCAL);
-//
-//        assertNotNull(result);
-//        assertEquals(1, result.size());
-//        assertEquals("Test Hotel", result.get(0).getName());
-//    }
+
+
+    @Test
+    void getHotelsByRecommendedTosTitle() {
+        List<HotelEntity> result = hotelService.getHotelsByRecommendedTo(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByLabelsTitle() {
+        List<HotelEntity> result = hotelService.getHotelsByLabel(HotelLabel.ECONOMY);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelsByCuisineTypesTitle() {
+        List<HotelEntity> result = hotelService.getHotelsByCuisineType(CuisineType.LOCAL);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Test Hotel", result.get(0).getName());
+    }
 
     @Test
     void getHotelsByRoomsRoomSize() {

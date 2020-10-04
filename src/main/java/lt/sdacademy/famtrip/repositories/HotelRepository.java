@@ -8,6 +8,7 @@ import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.Size;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
@@ -46,11 +47,14 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByCityCountryTitle(String title);
 
-//    List<HotelEntity> findAllByRecommendedTos(RecommendedTo recommendedTo);
-//
-//    List<HotelEntity> findAllByLabel(HotelLabel hotelLabel);
-//
-//    List<HotelEntity> findAllByCuisineType(CuisineType cuisineType);
+    @Query("from HotelEntity h join h.recommendedTos hrt where hrt.title=:recommendedTo")
+    List<HotelEntity> findAllByRecommendedTo(RecommendedTo recommendedTo);
+
+    @Query("from HotelEntity h join h.labels hl where hl.title=:hotelLabel")
+    List<HotelEntity> findAllByLabel(HotelLabel hotelLabel);
+
+    @Query("from HotelEntity h join h.cuisineTypes hct where hct.title=:cuisineType")
+    List<HotelEntity> findAllByCuisineType(CuisineType cuisineType);
 
     List<HotelEntity> findAllByRoomsRoomSize(Size roomSize);
 
