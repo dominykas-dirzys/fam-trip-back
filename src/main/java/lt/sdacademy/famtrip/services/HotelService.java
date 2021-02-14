@@ -21,7 +21,8 @@ public class HotelService {
     private final HotelConverter hotelConverter;
     private final HotelRepository hotelRepository;
 
-    public HotelService(HotelRepository hotelRepository) {
+    public HotelService(HotelConverter hotelConverter, HotelRepository hotelRepository) {
+        this.hotelConverter = hotelConverter;
         this.hotelRepository = hotelRepository;
     }
 
@@ -111,4 +112,10 @@ public class HotelService {
     public List<Hotel> getHotelsByRoomsRoomCondition(RoomCondition roomCondition) {
         return hotelConverter.convert(hotelRepository.findAllByRoomsRoomCondition(roomCondition));
     }
+
+    public Hotel getHotelById(Long id) {
+        return hotelConverter.convert(hotelRepository.findById(id));
+    }
+
 }
+
