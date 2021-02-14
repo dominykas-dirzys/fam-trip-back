@@ -2,6 +2,8 @@ package lt.sdacademy.famtrip.controllers;
 
 import lt.sdacademy.famtrip.models.dto.Hotel;
 import lt.sdacademy.famtrip.services.HotelService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +42,9 @@ public class HotelController {
         return hotelService.save(hotel);
     }
 
-    @DeleteMapping
-//    TODO
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        hotelService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
