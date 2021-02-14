@@ -11,17 +11,19 @@ public class HotelConverter extends AbstractBiConverter<HotelEntity, Hotel> {
     private final HotelRepository hotelRepository;
     private final RoomConverter roomConverter;
     private final UserConverter userConverter;
+    private final CityConverter cityConverter;
 
-    public HotelConverter(HotelRepository hotelRepository, RoomConverter roomConverter, UserConverter userConverter) {
+    public HotelConverter(HotelRepository hotelRepository, RoomConverter roomConverter, UserConverter userConverter, CityConverter cityConverter) {
         this.hotelRepository = hotelRepository;
         this.roomConverter = roomConverter;
         this.userConverter = userConverter;
+        this.cityConverter = cityConverter;
     }
 
     public Hotel convert(HotelEntity hotel) {
         return new Hotel(
                 hotel.getId(),
-                hotel.getCity(),
+                cityConverter.convert(hotel.getCity()),
                 hotel.getName(),
                 hotel.getOfficialRating(),
                 hotel.getInspectionScore(),
@@ -48,7 +50,7 @@ public class HotelConverter extends AbstractBiConverter<HotelEntity, Hotel> {
             result = hotelRepository.findById(hotel.getId());
         }
 
-        result.setCity(hotel.getCity());
+        result.setCity(cityConverter.convertToEntity(hotel.getCity()));
         result.setName(hotel.getName());
         result.setOfficialRating(hotel.getOfficialRating());
         result.setInspectionScore(hotel.getInspectionScore());

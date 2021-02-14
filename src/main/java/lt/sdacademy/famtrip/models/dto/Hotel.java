@@ -13,7 +13,7 @@ import java.util.List;
 public class Hotel {
 
     private Long id;
-    private CityEntity city;
+    private City city;
     private String name;
     private HotelRating officialRating;
     private Byte inspectionScore;
@@ -33,7 +33,7 @@ public class Hotel {
     public Hotel() {
     }
 
-    public Hotel(Long id, CityEntity city, String name, HotelRating officialRating, Byte inspectionScore, FoodQuality foodQuality, Size territorySize, boolean waterSlides, boolean spa, Integer distanceToBeach, Double distanceFromAirport, String remarks, User author, List<Room> rooms, List<RecommendedTo> recommendedTos, List<HotelLabel> labels, List<CuisineType> cuisineTypes) {
+    public Hotel(Long id, City city, String name, HotelRating officialRating, Byte inspectionScore, FoodQuality foodQuality, Size territorySize, boolean waterSlides, boolean spa, Integer distanceToBeach, Double distanceFromAirport, String remarks, User author, List<Room> rooms, List<RecommendedTo> recommendedTos, List<HotelLabel> labels, List<CuisineType> cuisineTypes) {
         this.id = id;
         this.city = city;
         this.name = name;
@@ -61,11 +61,11 @@ public class Hotel {
         this.id = id;
     }
 
-    public CityEntity getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(CityEntity city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
