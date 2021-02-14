@@ -31,13 +31,13 @@ public class HotelController {
     public List<Hotel> getHotels() {
         return hotelService.getHotels();
     }
+
     @GetMapping("{id}")
     public Hotel getHotel(@PathVariable Long id) {
         return hotelService.getHotelById(id);
     }
 
     @PostMapping
-//    TODO
     public Hotel save(@RequestBody @Valid Hotel hotel) {
         return hotelService.save(hotel);
     }

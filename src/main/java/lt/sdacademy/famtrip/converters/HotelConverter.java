@@ -14,6 +14,27 @@ public class HotelConverter {
         this.hotelRepository = hotelRepository;
     }
 
+//    public Hotel convert(HotelEntity hotel) {
+//        return new Hotel(
+//                hotel.getId(),
+//                hotel.getCity(),
+//                hotel.getName(),
+//                hotel.getOfficialRating(),
+//                hotel.getInspectionScore(),
+//                hotel.getFoodQuality(),
+//                hotel.getTerritorySize(),
+//                hotel.isWaterSlides(),
+//                hotel.isSpa(),
+//                hotel.getDistanceToBeach(),
+//                hotel.getDistanceFromAirport(),
+//                hotel.getRemarks(),
+//                hotel.getAuthor(),
+//                hotel.getRooms(),
+//                hotel.getRecommendedTos(),
+//                hotel.getLabels(),
+//                hotel.getCuisineTypes());
+//    }
+
     public Hotel convert(HotelEntity hotel) {
         return new Hotel(
                 hotel.getId(),
@@ -28,9 +49,9 @@ public class HotelConverter {
                 hotel.getDistanceToBeach(),
                 hotel.getDistanceFromAirport(),
                 hotel.getRemarks(),
-                hotel.getAuthor(),
-                hotel.getRooms(),
-                hotel.getRecommendedTos(),
+                userConverter.convert(hotel.getAuthor()),
+                roomConverter.convert(hotel.getRooms()),
+                hotel.getRecommendedTos().stream().map(r -> r.getTitle()).collect(toList()),
                 hotel.getLabels(),
                 hotel.getCuisineTypes());
     }
