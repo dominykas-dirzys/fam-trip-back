@@ -52,14 +52,11 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     List<HotelEntity> findAllByCityCountryTitle(String title);
 
-    @Query("from HotelEntity h join h.recommendedTos hrt where hrt.title=:recommendedTo")
-    List<HotelEntity> findAllByRecommendedTo(RecommendedTo recommendedTo);
+    List<HotelEntity> findAllByRecommendedTosContaining(RecommendedTo recommendedTo);
 
-    @Query("from HotelEntity h join h.labels hl where hl.title=:hotelLabel")
-    List<HotelEntity> findAllByLabel(HotelLabel hotelLabel);
+    List<HotelEntity> findAllByLabelsContaining(HotelLabel hotelLabel);
+    List<HotelEntity> findAllByCuisineTypesContaining(CuisineType cuisineType);
 
-    @Query("from HotelEntity h join h.cuisineTypes hct where hct.title=:cuisineType")
-    List<HotelEntity> findAllByCuisineType(CuisineType cuisineType);
 
     List<HotelEntity> findAllByRoomsRoomSize(Size roomSize);
 

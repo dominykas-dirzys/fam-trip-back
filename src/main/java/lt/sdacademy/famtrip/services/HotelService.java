@@ -94,15 +94,15 @@ public class HotelService {
     }
 
     public List<Hotel> getHotelsByRecommendedTo(RecommendedTo recommendedTo) {
-        return hotelConverter.convert(hotelRepository.findAllByRecommendedTo(recommendedTo));
+        return hotelConverter.convert(hotelRepository.findAllByRecommendedTosContaining(recommendedTo));
     }
 
     public List<Hotel> getHotelsByLabel(HotelLabel hotelLabel) {
-        return hotelConverter.convert(hotelRepository.findAllByLabel(hotelLabel));
+        return hotelConverter.convert(hotelRepository.findAllByLabelsContaining(hotelLabel));
     }
 
     public List<Hotel> getHotelsByCuisineType(CuisineType cuisineType) {
-        return hotelConverter.convert(hotelRepository.findAllByCuisineType(cuisineType));
+        return hotelConverter.convert(hotelRepository.findAllByCuisineTypesContaining(cuisineType));
     }
 
     public List<Hotel> getHotelsByRoomsRoomSize(Size roomSize) {

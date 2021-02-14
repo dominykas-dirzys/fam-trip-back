@@ -2,12 +2,8 @@ package lt.sdacademy.famtrip.converters;
 
 import lt.sdacademy.famtrip.models.dto.Hotel;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
-import lt.sdacademy.famtrip.repositories.CuisineTypeRepository;
 import lt.sdacademy.famtrip.repositories.HotelRepository;
-import lt.sdacademy.famtrip.repositories.LabelRepository;
 import org.springframework.stereotype.Component;
-
-import static java.util.stream.Collectors.toList;
 
 @Component
 public class HotelConverter extends AbstractBiConverter<HotelEntity, Hotel> {
