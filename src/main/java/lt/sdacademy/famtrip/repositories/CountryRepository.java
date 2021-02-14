@@ -13,4 +13,6 @@ public interface CountryRepository extends Repository<CountryEntity, Long> {
     CountryEntity save(CountryEntity country);
 
     void delete(CountryEntity country);
+
+    CountryEntity findById(Long id);
 }

@@ -30,4 +30,8 @@ public class CountryService {
     public void delete(CountryEntity country) {
         countryRepository.delete(country);
     }
+
+    public CountryEntity getCountryById(Long id) {
+        return countryRepository.findById(id);
+    }
 }
