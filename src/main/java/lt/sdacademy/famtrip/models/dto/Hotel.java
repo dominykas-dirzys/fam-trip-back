@@ -7,11 +7,6 @@ import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.Size;
 import lt.sdacademy.famtrip.models.entities.CityEntity;
-import lt.sdacademy.famtrip.models.entities.CuisineTypeEntity;
-import lt.sdacademy.famtrip.models.entities.LabelEntity;
-import lt.sdacademy.famtrip.models.entities.RecommendedToEntity;
-import lt.sdacademy.famtrip.models.entities.RoomEntity;
-import lt.sdacademy.famtrip.models.entities.UserEntity;
 
 import java.util.List;
 

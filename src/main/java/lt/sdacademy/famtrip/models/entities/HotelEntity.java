@@ -1,6 +1,8 @@
 package lt.sdacademy.famtrip.models.entities;
 
+import lt.sdacademy.famtrip.models.CuisineType;
 import lt.sdacademy.famtrip.models.FoodQuality;
+import lt.sdacademy.famtrip.models.HotelLabel;
 import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.Size;
@@ -16,7 +18,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -81,15 +82,17 @@ public class HotelEntity extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private List<RecommendedTo> recommendedTos = new ArrayList<>();
 
-    @JoinTable(name = "hotel_label", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SUBSELECT)
-    private List<LabelEntity> labels = new ArrayList<>();
+    @ElementCollection(targetClass = HotelLabel.class)
+    @JoinTable(name = "hotel_label", joinColumns = @JoinColumn(name = "hotel_id"))
+    @Column(name = "title", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private List<HotelLabel> labels = new ArrayList<>();
 
-    @JoinTable(name = "hotel_cuisine_type", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "cuisine_type_id"))
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SUBSELECT)
-    private List<CuisineTypeEntity> cuisineTypes = new ArrayList<>();
+    @ElementCollection(targetClass = CuisineType.class)
+    @JoinTable(name = "hotel_cuisine_type", joinColumns = @JoinColumn(name = "hotel_id"))
+    @Column(name = "title", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private List<CuisineType> cuisineTypes = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -195,27 +198,27 @@ public class HotelEntity extends AbstractEntity {
         this.rooms = rooms;
     }
 
-    public List<RecommendedToEntity> getRecommendedTos() {
+    public List<RecommendedTo> getRecommendedTos() {
         return recommendedTos;
     }
 
-    public void setRecommendedTos(List<RecommendedToEntity> recommendedTos) {
+    public void setRecommendedTos(List<RecommendedTo> recommendedTos) {
         this.recommendedTos = recommendedTos;
     }
 
-    public List<LabelEntity> getLabels() {
+    public List<HotelLabel> getLabels() {
         return labels;
     }
 
-    public void setLabels(List<LabelEntity> labels) {
+    public void setLabels(List<HotelLabel> labels) {
         this.labels = labels;
     }
 
-    public List<CuisineTypeEntity> getCuisineTypes() {
+    public List<CuisineType> getCuisineTypes() {
         return cuisineTypes;
     }
 
-    public void setCuisineTypes(List<CuisineTypeEntity> cuisineTypes) {
+    public void setCuisineTypes(List<CuisineType> cuisineTypes) {
         this.cuisineTypes = cuisineTypes;
     }
 }

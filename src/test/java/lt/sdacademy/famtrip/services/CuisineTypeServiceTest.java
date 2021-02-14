@@ -1,7 +1,6 @@
 package lt.sdacademy.famtrip.services;
 
 import lt.sdacademy.famtrip.models.CuisineType;
-import lt.sdacademy.famtrip.models.entities.CuisineTypeEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
