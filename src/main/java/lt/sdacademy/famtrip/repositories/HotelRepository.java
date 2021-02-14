@@ -7,6 +7,7 @@ import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.Size;
+import lt.sdacademy.famtrip.models.dto.Hotel;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
@@ -19,9 +20,13 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     HotelEntity save(HotelEntity hotelEntity);
 
+    Hotel save(Hotel hotel);
+
     void delete(HotelEntity hotelEntity);
 
     HotelEntity findByName(String name);
+
+    HotelEntity findById(Long id);
 
     List<HotelEntity> findAllByNameContains(String name);
 
