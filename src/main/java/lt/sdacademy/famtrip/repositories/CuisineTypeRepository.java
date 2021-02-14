@@ -9,6 +9,8 @@ import java.util.List;
 public interface CuisineTypeRepository extends Repository<CuisineTypeEntity, Long> {
     List<CuisineTypeEntity> findAll();
 
+    CuisineTypeEntity findByTitle(CuisineType title);
+
     List<CuisineTypeEntity> findAllByTitle(CuisineType title);
 
     CuisineTypeEntity save(CuisineTypeEntity cuisineType);
