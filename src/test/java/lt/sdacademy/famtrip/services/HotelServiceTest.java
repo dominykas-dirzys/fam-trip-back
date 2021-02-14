@@ -12,9 +12,7 @@
 //import lt.sdacademy.famtrip.models.dto.Hotel;
 //import lt.sdacademy.famtrip.models.entities.CityEntity;
 //import lt.sdacademy.famtrip.models.entities.CountryEntity;
-//import lt.sdacademy.famtrip.models.entities.CuisineTypeEntity;
 //import lt.sdacademy.famtrip.models.entities.HotelEntity;
-//import lt.sdacademy.famtrip.models.entities.LabelEntity;
 //import lt.sdacademy.famtrip.models.entities.RecommendedToEntity;
 //import lt.sdacademy.famtrip.models.entities.RoomEntity;
 //import lt.sdacademy.famtrip.models.entities.UserEntity;

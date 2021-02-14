@@ -1,34 +1,15 @@
 package lt.sdacademy.famtrip.services;
 
 import lt.sdacademy.famtrip.models.RecommendedTo;
-import lt.sdacademy.famtrip.models.entities.RecommendedToEntity;
-import lt.sdacademy.famtrip.repositories.RecommendedToRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class RecommendedToService {
 
-    private final RecommendedToRepository recommendedToRepository;
-
-    public RecommendedToService(RecommendedToRepository recommendedToRepository) {
-        this.recommendedToRepository = recommendedToRepository;
-    }
-
-    public List<RecommendedToEntity> getRecommendedTos() {
-        return recommendedToRepository.findAll();
-    }
-
-    public RecommendedToEntity save(RecommendedToEntity recommendedToEntity) {
-        return recommendedToRepository.save(recommendedToEntity);
-    }
-
-    public void delete(RecommendedToEntity recommendedToEntity) {
-        recommendedToRepository.delete(recommendedToEntity);
-    }
-
-    public RecommendedToEntity getRecommendedToByTitle(RecommendedTo title) {
-        return recommendedToRepository.findByTitle(title);
+    public List<RecommendedTo> getRecommendedTos() {
+        return Arrays.asList(RecommendedTo.values());
     }
 }
