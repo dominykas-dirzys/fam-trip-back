@@ -2,12 +2,14 @@ package lt.sdacademy.famtrip.models.entities;
 
 import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelRating;
+import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.Size;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -70,22 +73,23 @@ public class HotelEntity extends AbstractEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
     @OrderBy(value = "id")
-    private List<RoomEntity> rooms;
+    private List<RoomEntity> rooms = new ArrayList<>();
 
-    @JoinTable(name = "hotel_recommended_to", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "recommended_to_id"))
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SUBSELECT)
-    private List<RecommendedToEntity> recommendedTos;
+    @ElementCollection(targetClass = RecommendedTo.class)
+    @JoinTable(name = "hotel_recommended_to", joinColumns = @JoinColumn(name = "hotel_id"))
+    @Column(name = "title", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private List<RecommendedTo> recommendedTos = new ArrayList<>();
 
     @JoinTable(name = "hotel_label", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    private List<LabelEntity> labels;
+    private List<LabelEntity> labels = new ArrayList<>();
 
     @JoinTable(name = "hotel_cuisine_type", joinColumns = @JoinColumn(name = "hotel_id"), inverseJoinColumns = @JoinColumn(name = "cuisine_type_id"))
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    private List<CuisineTypeEntity> cuisineTypes;
+    private List<CuisineTypeEntity> cuisineTypes = new ArrayList<>();
 
     public String getName() {
         return name;

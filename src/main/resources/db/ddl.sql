@@ -31,12 +31,6 @@ create table cuisine_type
     title    varchar(50) unique not null
 );
 
-create table recommended_to
-(
-    id       bigint unsigned auto_increment primary key,
-    title    varchar(50) unique not null
-);
-
 create table hotel
 (
     id                    bigint unsigned auto_increment primary key,
@@ -74,10 +68,10 @@ create table hotel_cuisine_type
 
 create table hotel_recommended_to
 (
+    id       bigint unsigned auto_increment primary key,
+    title    varchar(50) unique not null,
     hotel_id bigint unsigned not null,
-    constraint fk_hotel_recommended_to_hotel foreign key (hotel_id) references hotel (id),
-    recommended_to_id bigint unsigned not null,
-    constraint fk_hotel_recommended_to_recommended_to foreign key (recommended_to_id) references recommended_to (id)
+    constraint fk_hotel_recommended_to_hotel foreign key (hotel_id) references hotel (id)
 );
 
 create table room
