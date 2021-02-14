@@ -1,5 +1,6 @@
 package lt.sdacademy.famtrip.services;
 
+import lt.sdacademy.famtrip.converters.HotelConverter;
 import lt.sdacademy.famtrip.models.CuisineType;
 import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelLabel;
@@ -8,6 +9,7 @@ import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.RoomType;
 import lt.sdacademy.famtrip.models.Size;
+import lt.sdacademy.famtrip.models.dto.Hotel;
 import lt.sdacademy.famtrip.models.entities.CityEntity;
 import lt.sdacademy.famtrip.models.entities.CountryEntity;
 import lt.sdacademy.famtrip.models.entities.CuisineTypeEntity;
@@ -55,6 +57,9 @@ class HotelServiceTest {
 
     @Autowired
     private CuisineTypeService cuisineTypeService;
+
+    @Autowired
+    private HotelConverter hotelConverter;
 
     @BeforeEach
     void setup() {
@@ -125,7 +130,7 @@ class HotelServiceTest {
 
     @Test
     void getHotels() {
-        List<HotelEntity> result = hotelService.getHotels();
+        List<Hotel> result = hotelService.getHotels();
 
         assertEquals(1, result.size());
         assertEquals("Test Hotel", result.get(0).getName());
@@ -140,9 +145,9 @@ class HotelServiceTest {
 
     @Test
     void delete() {
-        List<HotelEntity> hotels = hotelService.getHotels();
+        List<Hotel> hotels = hotelService.getHotels();
         int oldSize = hotels.size();
-        hotelService.delete(hotels.get(0));
+        hotelService.delete(hotelConverter.convertToEntity(hotels.get(0)));
         hotels = hotelService.getHotels();
 
         assertEquals(oldSize - 1, hotels.size());

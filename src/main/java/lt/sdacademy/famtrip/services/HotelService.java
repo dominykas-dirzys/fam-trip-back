@@ -1,5 +1,6 @@
 package lt.sdacademy.famtrip.services;
 
+import lt.sdacademy.famtrip.converters.HotelConverter;
 import lt.sdacademy.famtrip.models.CuisineType;
 import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelLabel;
@@ -7,6 +8,7 @@ import lt.sdacademy.famtrip.models.HotelRating;
 import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.Size;
+import lt.sdacademy.famtrip.models.dto.Hotel;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import lt.sdacademy.famtrip.repositories.HotelRepository;
 import org.springframework.stereotype.Service;
@@ -17,13 +19,15 @@ import java.util.List;
 public class HotelService {
 
     private final HotelRepository hotelRepository;
+    private final HotelConverter hotelConverter;
 
-    public HotelService(HotelRepository hotelRepository) {
+    public HotelService(HotelRepository hotelRepository, HotelConverter hotelConverter) {
         this.hotelRepository = hotelRepository;
+        this.hotelConverter = hotelConverter;
     }
 
-    public List<HotelEntity> getHotels() {
-        return hotelRepository.findAll();
+    public List<Hotel> getHotels() {
+        return hotelConverter.convert(hotelRepository.findAll());
     }
 
     public HotelEntity save(HotelEntity hotelEntity) {
@@ -104,5 +108,9 @@ public class HotelService {
 
     public List<HotelEntity> getHotelsByRoomsRoomCondition(RoomCondition roomCondition) {
         return hotelRepository.findAllByRoomsRoomCondition(roomCondition);
+    }
+
+    public Hotel getHotelById(Long id) {
+        return hotelConverter.convert(hotelRepository.findById(id));
     }
 }
