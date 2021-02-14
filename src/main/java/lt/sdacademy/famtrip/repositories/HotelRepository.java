@@ -22,7 +22,7 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
 
     Hotel save(Hotel hotel);
 
-    void delete(HotelEntity hotelEntity);
+    void deleteById(Long id);
 
     HotelEntity findByName(String name);
 
