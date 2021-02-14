@@ -34,5 +34,7 @@ public class CityConverter {
 
         result.setTitle(city.getTitle());
         result.setCountry(countryConverter.convertToEntity(city.getCountry()));
+
+        return result;
     }
 }
