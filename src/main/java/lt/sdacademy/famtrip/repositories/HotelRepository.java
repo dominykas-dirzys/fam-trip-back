@@ -55,8 +55,8 @@ public interface HotelRepository extends Repository<HotelEntity, Long> {
     List<HotelEntity> findAllByRecommendedTosContaining(RecommendedTo recommendedTo);
 
     List<HotelEntity> findAllByLabelsContaining(HotelLabel hotelLabel);
-    List<HotelEntity> findAllByCuisineTypesContaining(CuisineType cuisineType);
 
+    List<HotelEntity> findAllByCuisineTypesContaining(CuisineType cuisineType);
 
     List<HotelEntity> findAllByRoomsRoomSize(Size roomSize);
 
