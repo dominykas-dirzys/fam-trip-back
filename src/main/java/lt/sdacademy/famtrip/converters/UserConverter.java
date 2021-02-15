@@ -16,7 +16,6 @@ public class UserConverter extends AbstractBiConverter<UserEntity, User> {
     public User convert(UserEntity user) {
         return new User(
             user.getId(),
-            user.getPassword(),
             user.getEmail()
         );
     }
