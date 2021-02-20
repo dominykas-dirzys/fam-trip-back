@@ -41,7 +41,7 @@ create table hotel
 create table hotel_label
 (
     id       bigint unsigned auto_increment primary key,
-    title    varchar(50) unique not null,
+    title    varchar(50) not null,
     hotel_id bigint unsigned not null,
     constraint fk_hotel_label_hotel foreign key (hotel_id) references hotel (id)
 );
@@ -49,7 +49,7 @@ create table hotel_label
 create table hotel_cuisine_type
 (
     id       bigint unsigned auto_increment primary key,
-    title    varchar(50) unique not null,
+    title    varchar(50) not null,
     hotel_id bigint unsigned not null,
     constraint fk_hotel_cuisine_type_hotel foreign key (hotel_id) references hotel (id)
 );
@@ -57,7 +57,7 @@ create table hotel_cuisine_type
 create table hotel_recommended_to
 (
     id       bigint unsigned auto_increment primary key,
-    title    varchar(50) unique not null,
+    title    varchar(50) not null,
     hotel_id bigint unsigned not null,
     constraint fk_hotel_recommended_to_hotel foreign key (hotel_id) references hotel (id)
 );
