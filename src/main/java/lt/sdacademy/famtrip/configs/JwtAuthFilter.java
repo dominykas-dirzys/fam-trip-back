@@ -36,11 +36,12 @@ public class JwtAuthFilter extends BasicAuthenticationFilter {
             String jwtToken = requestTokenHeader.substring(PREFIX.length());
             try {
                 Claims claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwtToken).getBody();
+                String id = claims.getId();
                 String email = claims.getSubject();
                 Date tokenExpirationDate = claims.getExpiration();
 
                 if (tokenExpirationDate.after(new Date())) {
-                    Authentication authentication = new UsernamePasswordAuthenticationToken(new User(email), null, new ArrayList<>());
+                    Authentication authentication = new UsernamePasswordAuthenticationToken(new User(Long.parseLong(id), email), null, new ArrayList<>());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             } catch (Exception e) {

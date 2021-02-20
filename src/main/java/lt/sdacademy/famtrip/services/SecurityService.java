@@ -44,9 +44,10 @@ public class SecurityService implements UserDetailsService {
         return userConverter.convert(userRepository.save(userEntity));
     }
 
-    public String generateToken(String email) {
+    public String generateToken(Long id, String email) {
         return Jwts.builder()
             .setClaims(new HashMap<>())
+            .setId(id.toString())
             .setSubject(email)
             .setIssuedAt(new Date(System.currentTimeMillis()))
             .setExpiration(new Date(System.currentTimeMillis() + JwtAuthFilter.VALIDITY))
