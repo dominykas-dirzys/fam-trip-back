@@ -16,4 +16,6 @@ public interface UserRepository extends Repository<UserEntity, Long> {
     UserEntity findOneById(Long id);
 
     UserEntity findByEmail(String email);
+
+    boolean existsByEmail(String email);
 }

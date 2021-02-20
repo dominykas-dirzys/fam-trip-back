@@ -6,18 +6,24 @@ import lt.sdacademy.famtrip.repositories.HotelRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HotelConverter {
+public class HotelConverter extends AbstractBiConverter<HotelEntity, Hotel> {
 
     private final HotelRepository hotelRepository;
+    private final RoomConverter roomConverter;
+    private final UserConverter userConverter;
+    private final CityConverter cityConverter;
 
-    public HotelConverter(HotelRepository hotelRepository) {
+    public HotelConverter(HotelRepository hotelRepository, RoomConverter roomConverter, UserConverter userConverter, CityConverter cityConverter) {
         this.hotelRepository = hotelRepository;
+        this.roomConverter = roomConverter;
+        this.userConverter = userConverter;
+        this.cityConverter = cityConverter;
     }
 
     public Hotel convert(HotelEntity hotel) {
         return new Hotel(
                 hotel.getId(),
-                hotel.getCity(),
+                cityConverter.convert(hotel.getCity()),
                 hotel.getName(),
                 hotel.getOfficialRating(),
                 hotel.getInspectionScore(),
@@ -28,11 +34,12 @@ public class HotelConverter {
                 hotel.getDistanceToBeach(),
                 hotel.getDistanceFromAirport(),
                 hotel.getRemarks(),
-                hotel.getAuthor(),
-                hotel.getRooms(),
+                userConverter.convert(hotel.getAuthor()),
+                roomConverter.convert(hotel.getRooms()),
                 hotel.getRecommendedTos(),
                 hotel.getLabels(),
-                hotel.getCuisineTypes());
+                hotel.getCuisineTypes()
+        );
     }
 
     public HotelEntity convertToEntity(Hotel hotel) {
@@ -43,7 +50,7 @@ public class HotelConverter {
             result = hotelRepository.findById(hotel.getId());
         }
 
-        result.setCity(hotel.getCity());
+        result.setCity(cityConverter.convertToEntity(hotel.getCity()));
         result.setName(hotel.getName());
         result.setOfficialRating(hotel.getOfficialRating());
         result.setInspectionScore(hotel.getInspectionScore());
@@ -54,8 +61,8 @@ public class HotelConverter {
         result.setDistanceToBeach(hotel.getDistanceToBeach());
         result.setDistanceFromAirport(hotel.getDistanceFromAirport());
         result.setRemarks(hotel.getRemarks());
-        result.setAuthor(hotel.getAuthor());
-        result.setRooms(hotel.getRooms());
+        result.setAuthor(userConverter.convertToEntity(hotel.getAuthor()));
+        result.setRooms(roomConverter.convertToEntity(hotel.getRooms()));
         result.setRecommendedTos(hotel.getRecommendedTos());
         result.setLabels(hotel.getLabels());
         result.setCuisineTypes(hotel.getCuisineTypes());

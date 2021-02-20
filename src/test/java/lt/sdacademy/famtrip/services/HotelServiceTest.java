@@ -1,5 +1,6 @@
 package lt.sdacademy.famtrip.services;
 
+import lt.sdacademy.famtrip.converters.HotelConverter;
 import lt.sdacademy.famtrip.models.CuisineType;
 import lt.sdacademy.famtrip.models.FoodQuality;
 import lt.sdacademy.famtrip.models.HotelLabel;
@@ -8,12 +9,10 @@ import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.RoomType;
 import lt.sdacademy.famtrip.models.Size;
+import lt.sdacademy.famtrip.models.dto.Hotel;
 import lt.sdacademy.famtrip.models.entities.CityEntity;
 import lt.sdacademy.famtrip.models.entities.CountryEntity;
-import lt.sdacademy.famtrip.models.entities.CuisineTypeEntity;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
-import lt.sdacademy.famtrip.models.entities.LabelEntity;
-import lt.sdacademy.famtrip.models.entities.RecommendedToEntity;
 import lt.sdacademy.famtrip.models.entities.RoomEntity;
 import lt.sdacademy.famtrip.models.entities.UserEntity;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,13 +47,7 @@ class HotelServiceTest {
     private UserService userService;
 
     @Autowired
-    private LabelService labelService;
-
-    @Autowired
-    private RecommendedToService recommendedToService;
-
-    @Autowired
-    private CuisineTypeService cuisineTypeService;
+    private HotelConverter hotelConverter;
 
     @BeforeEach
     void setup() {
@@ -72,20 +65,20 @@ class HotelServiceTest {
         user.setPassword("password");
         userService.save(user);
 
-        RecommendedToEntity recommendedTo = new RecommendedToEntity();
-        recommendedTo.setTitle(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
-
-        CuisineTypeEntity cuisineType = new CuisineTypeEntity();
-        cuisineType.setTitle(CuisineType.LOCAL);
-
-        LabelEntity label = new LabelEntity();
-        label.setTitle(HotelLabel.ECONOMY);
-
         RoomEntity room = new RoomEntity();
         room.setRoomType(RoomType.STANDARD_DBL);
         room.setRoomSize(Size.LARGE);
         room.setRoomCondition(RoomCondition.VERY_GOOD);
         room.setRemarks("Very good room");
+
+        List<RecommendedTo> recommendedTos = new ArrayList<>();
+        recommendedTos.add(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
+
+        List<CuisineType> cuisineTypes = new ArrayList<>();
+        cuisineTypes.add(CuisineType.LOCAL);
+
+        List<HotelLabel> labels = new ArrayList<>();
+        labels.add(HotelLabel.ECONOMY);
 
         HotelEntity hotel = new HotelEntity();
         hotel.setName("Test Hotel");
@@ -100,32 +93,20 @@ class HotelServiceTest {
         hotel.setDistanceFromAirport(10.0);
         hotel.setRemarks("Wonderful hotel");
         hotel.setAuthor(user);
-
-        List<RecommendedToEntity> recommendedTos = new ArrayList<>();
-        recommendedTos.add(recommendedTo);
         hotel.setRecommendedTos(recommendedTos);
-
-        List<CuisineTypeEntity> cuisineTypes = new ArrayList<>();
-        cuisineTypes.add(cuisineType);
         hotel.setCuisineTypes(cuisineTypes);
-
-        List<LabelEntity> labels = new ArrayList<>();
-        labels.add(label);
         hotel.setLabels(labels);
 
         List<RoomEntity> rooms = new ArrayList<>();
         rooms.add(room);
         hotel.setRooms(rooms);
 
-        hotelService.save(hotel);
-        labelService.save(label);
-        recommendedToService.save(recommendedTo);
-        cuisineTypeService.save(cuisineType);
+        hotelService.save(hotelConverter.convert(hotel));
     }
 
     @Test
     void getHotels() {
-        List<HotelEntity> result = hotelService.getHotels();
+        List<Hotel> result = hotelService.getHotels();
 
         assertEquals(1, result.size());
         assertEquals("Test Hotel", result.get(0).getName());
@@ -140,9 +121,9 @@ class HotelServiceTest {
 
     @Test
     void delete() {
-        List<HotelEntity> hotels = hotelService.getHotels();
+        List<Hotel> hotels = hotelService.getHotels();
         int oldSize = hotels.size();
-        hotelService.delete(hotels.get(0));
+        hotelService.delete(hotels.get(0).getId());
         hotels = hotelService.getHotels();
 
         assertEquals(oldSize - 1, hotels.size());
@@ -150,7 +131,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelByName() {
-        HotelEntity result = hotelService.getHotelByName("Test Hotel");
+        Hotel result = hotelService.getHotelByName("Test Hotel");
 
         assertNotNull(result);
         assertEquals("Test Hotel", result.getName());
@@ -158,7 +139,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByNameContains() {
-        List<HotelEntity> result = hotelService.getHotelsByNameContains("Test");
+        List<Hotel> result = hotelService.getHotelsByNameContains("Test");
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -167,7 +148,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByCityTitle() {
-        List<HotelEntity> result = hotelService.getHotelsByCityTitle("TestCity");
+        List<Hotel> result = hotelService.getHotelsByCityTitle("TestCity");
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -176,7 +157,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByOfficialRating() {
-        List<HotelEntity> result = hotelService.getHotelsByOfficialRating(HotelRating.FIVE_STAR);
+        List<Hotel> result = hotelService.getHotelsByOfficialRating(HotelRating.FIVE_STAR);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -185,7 +166,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByInspectionScore() {
-        List<HotelEntity> result = hotelService.getHotelsByInspectionScore((byte) 10);
+        List<Hotel> result = hotelService.getHotelsByInspectionScore((byte) 10);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -194,7 +175,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByFoodQuality() {
-        List<HotelEntity> result = hotelService.getHotelsByFoodQuality(FoodQuality.FANTASTIC);
+        List<Hotel> result = hotelService.getHotelsByFoodQuality(FoodQuality.FANTASTIC);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -203,7 +184,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByTerritorySize() {
-        List<HotelEntity> result = hotelService.getHotelsByTerritorySize(Size.LARGE);
+        List<Hotel> result = hotelService.getHotelsByTerritorySize(Size.LARGE);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -212,7 +193,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByWaterSlides() {
-        List<HotelEntity> result = hotelService.getHotelsByWaterSlides(true);
+        List<Hotel> result = hotelService.getHotelsByWaterSlides(true);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -221,7 +202,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsBySpa() {
-        List<HotelEntity> result = hotelService.getHotelsBySpa(true);
+        List<Hotel> result = hotelService.getHotelsBySpa(true);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -230,7 +211,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByDistanceToBeach() {
-        List<HotelEntity> result = hotelService.getHotelsByDistanceToBeach(500);
+        List<Hotel> result = hotelService.getHotelsByDistanceToBeach(500);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -239,7 +220,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByDistanceFromAirport() {
-        List<HotelEntity> result = hotelService.getHotelsByDistanceFromAirport(10.0);
+        List<Hotel> result = hotelService.getHotelsByDistanceFromAirport(10.0);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -248,7 +229,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByAuthorId() {
-        List<HotelEntity> result = hotelService.getHotelsByAuthorId(hotelService.getHotels().get(0).getAuthor().getId());
+        List<Hotel> result = hotelService.getHotelsByAuthorId(hotelService.getHotels().get(0).getAuthor().getId());
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -257,7 +238,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByCityCountryTitle() {
-        List<HotelEntity> result = hotelService.getHotelsByCityCountryTitle("TestNation");
+        List<Hotel> result = hotelService.getHotelsByCityCountryTitle("TestNation");
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -267,7 +248,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByRecommendedTosTitle() {
-        List<HotelEntity> result = hotelService.getHotelsByRecommendedTo(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
+        List<Hotel> result = hotelService.getHotelsByRecommendedTo(RecommendedTo.FAMILIES_WITH_OLDER_CHILDREN);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -276,7 +257,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByLabelsTitle() {
-        List<HotelEntity> result = hotelService.getHotelsByLabel(HotelLabel.ECONOMY);
+        List<Hotel> result = hotelService.getHotelsByLabel(HotelLabel.ECONOMY);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -285,7 +266,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByCuisineTypesTitle() {
-        List<HotelEntity> result = hotelService.getHotelsByCuisineType(CuisineType.LOCAL);
+        List<Hotel> result = hotelService.getHotelsByCuisineType(CuisineType.LOCAL);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -294,7 +275,7 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByRoomsRoomSize() {
-        List<HotelEntity> result = hotelService.getHotelsByRoomsRoomSize(Size.LARGE);
+        List<Hotel> result = hotelService.getHotelsByRoomsRoomSize(Size.LARGE);
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -303,10 +284,18 @@ class HotelServiceTest {
 
     @Test
     void getHotelsByRoomsRoomCondition() {
-        List<HotelEntity> result = hotelService.getHotelsByRoomsRoomCondition(RoomCondition.VERY_GOOD);
+        List<Hotel> result = hotelService.getHotelsByRoomsRoomCondition(RoomCondition.VERY_GOOD);
 
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals("Test Hotel", result.get(0).getName());
+    }
+
+    @Test
+    void getHotelById() {
+        Hotel result = hotelService.getHotelById(hotelService.getHotels().get(0).getId());
+
+        assertNotNull(result);
+        assertEquals("Test Hotel", result.getName());
     }
 }

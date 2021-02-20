@@ -12,6 +12,8 @@ public interface CityRepository extends Repository<CityEntity, Long> {
 
     List<CityEntity> findAllByCountryTitle(String title);
 
+    CityEntity findById(Long id);
+
     CityEntity save(CityEntity city);
 
     void delete(CityEntity city);

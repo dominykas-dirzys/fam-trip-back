@@ -6,7 +6,7 @@ import lt.sdacademy.famtrip.repositories.RoomRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RoomConverter {
+public class RoomConverter extends AbstractBiConverter<RoomEntity, Room> {
 
     private final RoomRepository roomRepository;
 
