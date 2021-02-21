@@ -65,7 +65,7 @@ create table hotel_recommended_to
 create table room
 (
     id             bigint unsigned auto_increment primary key,
-    type           varchar(50) unique,
+    type           varchar(50),
     room_type      varchar(50)     not null,
     size           varchar(50),
     room_condition varchar(50),
