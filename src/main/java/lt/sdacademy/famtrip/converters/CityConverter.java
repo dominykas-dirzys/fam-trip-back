@@ -6,7 +6,7 @@ import lt.sdacademy.famtrip.repositories.CityRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CityConverter {
+public class CityConverter extends AbstractBiConverter<CityEntity, City> {
 
     private final CityRepository cityRepository;
     private final CountryConverter countryConverter;

@@ -16,5 +16,5 @@ public interface CityRepository extends Repository<CityEntity, Long> {
 
     CityEntity save(CityEntity city);
 
-    void delete(CityEntity city);
+    void deleteById(Long id);
 }

@@ -1,5 +1,7 @@
 package lt.sdacademy.famtrip.services;
 
+import lt.sdacademy.famtrip.converters.CityConverter;
+import lt.sdacademy.famtrip.models.dto.City;
 import lt.sdacademy.famtrip.models.entities.CityEntity;
 import lt.sdacademy.famtrip.repositories.CityRepository;
 import org.springframework.stereotype.Service;
@@ -10,28 +12,37 @@ import java.util.List;
 public class CityService {
 
     private final CityRepository cityRepository;
+    private final CityConverter cityConverter;
 
-    public CityService(CityRepository cityRepository) {
+    public CityService(CityRepository cityRepository, CityConverter cityConverter) {
         this.cityRepository = cityRepository;
+        this.cityConverter = cityConverter;
     }
 
-    public List<CityEntity> getCities() {
-        return cityRepository.findAll();
+    public List<City> getCities() {
+        return cityConverter.convert(cityRepository.findAll());
     }
 
-    public List<CityEntity> getCitiesByTitle(String cityTitle) {
-        return cityRepository.findAllByTitle(cityTitle);
+    public City getCityById(Long id) {
+        return cityConverter.convert(cityRepository.findById(id));
     }
 
-    public List<CityEntity> getCitiesByCountryTitle(String countryTitle) {
-        return cityRepository.findAllByCountryTitle(countryTitle);
+    public List<City> getCitiesByTitle(String cityTitle) {
+        return cityConverter.convert(cityRepository.findAllByTitle(cityTitle));
     }
 
-    public CityEntity save(CityEntity city) {
-        return cityRepository.save(city);
+    public List<City> getCitiesByCountryTitle(String countryTitle) {
+        return cityConverter.convert(cityRepository.findAllByCountryTitle(countryTitle));
     }
 
-    public void delete(CityEntity city) {
-        cityRepository.delete(city);
+    public City save(City city) {
+        CityEntity cityEntity = cityConverter.convertToEntity(city);
+        cityRepository.save(cityEntity);
+
+        return cityConverter.convert(cityEntity);
+    }
+
+    public void delete(Long id) {
+        cityRepository.deleteById(id);
     }
 }

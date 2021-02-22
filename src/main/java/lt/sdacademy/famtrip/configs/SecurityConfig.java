@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/hotels/*").permitAll()
             .antMatchers("/login").permitAll()
             .antMatchers("/sign-up").permitAll()
-            .anyRequest().authenticated()
+            .anyRequest().permitAll()
             .and()
             .addFilter(new JwtAuthFilter(authenticationManager()))
             .sessionManagement()
