@@ -12,7 +12,7 @@ public interface CountryRepository extends Repository<CountryEntity, Long> {
 
     CountryEntity save(CountryEntity country);
 
-    void delete(Long id);
+    void deleteById(Long id);
 
     CountryEntity findById(Long id);
 }
