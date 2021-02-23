@@ -195,7 +195,9 @@ public class HotelEntity extends AbstractEntity {
     }
 
     public void setRooms(List<RoomEntity> rooms) {
-        this.rooms = rooms;
+        this.rooms.clear();
+        this.rooms.addAll(rooms);
+//        this.rooms = rooms;
     }
 
     public List<RecommendedTo> getRecommendedTos() {
