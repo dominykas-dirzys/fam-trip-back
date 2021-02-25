@@ -25,11 +25,16 @@ public class UserConverter extends AbstractBiConverter<UserEntity, User> {
 
         if (user.getId() != null) {
             result = userRepository.findOneById(user.getId());
-            return result;
         }
 
-        result.setPassword(user.getPassword());
-        result.setEmail(user.getEmail());
+        if (user.getPassword() != null) {
+            result.setPassword(user.getPassword());
+        }
+
+        if (user.getEmail() != null) {
+            result.setEmail(user.getEmail());
+        }
+
 
         return result;
     }
