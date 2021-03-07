@@ -8,6 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +34,10 @@ public class RoomEntity extends AbstractEntity {
 
     @Column(name = "remarks", columnDefinition = "text")
     private String remarks;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hotel_id", nullable = false)
+    private HotelEntity hotel;
 
     public String getType() {
         return type;
@@ -70,5 +77,13 @@ public class RoomEntity extends AbstractEntity {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public HotelEntity getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(HotelEntity hotel) {
+        this.hotel = hotel;
     }
 }

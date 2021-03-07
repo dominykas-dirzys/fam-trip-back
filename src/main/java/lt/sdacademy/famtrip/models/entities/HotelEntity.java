@@ -70,8 +70,7 @@ public class HotelEntity extends AbstractEntity {
     @JoinColumn(name = "author_id", nullable = false)
     private UserEntity author;
 
-    @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel", fetch = FetchType.EAGER, orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
     @OrderBy(value = "id")
     private List<RoomEntity> rooms = new ArrayList<>();

@@ -12,17 +12,19 @@ public class Room {
     private Size size;
     private RoomCondition roomCondition;
     private String remarks;
+    private Long hotelId;
 
     public Room() {
     }
 
-    public Room(Long id, String type, RoomType roomType, Size size, RoomCondition roomCondition, String remarks) {
+    public Room(Long id, String type, RoomType roomType, Size size, RoomCondition roomCondition, String remarks, Long hotelId) {
         this.id = id;
         this.type = type;
         this.roomType = roomType;
         this.size = size;
         this.roomCondition = roomCondition;
         this.remarks = remarks;
+        this.hotelId = hotelId;
     }
 
     public Long getId() {
@@ -71,5 +73,13 @@ public class Room {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public Long getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(Long hotelId) {
+        this.hotelId = hotelId;
     }
 }
