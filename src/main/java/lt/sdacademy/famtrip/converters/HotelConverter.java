@@ -7,6 +7,8 @@ import lt.sdacademy.famtrip.repositories.HotelRepository;
 import lt.sdacademy.famtrip.repositories.UserRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public class HotelConverter extends AbstractBiConverter<HotelEntity, Hotel> {
 
@@ -67,7 +69,7 @@ public class HotelConverter extends AbstractBiConverter<HotelEntity, Hotel> {
         result.setRemarks(hotel.getRemarks());
         UserEntity author = userRepository.findOneById(hotel.getAuthor().getId());
         result.setAuthor(author);
-        result.setRooms(roomConverter.convertToEntity(hotel.getRooms()));
+        result.setRooms(roomConverter.convertToEntity(hotel.getRooms() == null ? new ArrayList<>() : hotel.getRooms()));
         result.setRecommendedTos(hotel.getRecommendedTos());
         result.setLabels(hotel.getLabels());
         result.setCuisineTypes(hotel.getCuisineTypes());
