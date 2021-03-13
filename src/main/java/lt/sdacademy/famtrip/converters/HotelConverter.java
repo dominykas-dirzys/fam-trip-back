@@ -2,19 +2,24 @@ package lt.sdacademy.famtrip.converters;
 
 import lt.sdacademy.famtrip.models.dto.Hotel;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
+import lt.sdacademy.famtrip.models.entities.UserEntity;
 import lt.sdacademy.famtrip.repositories.HotelRepository;
+import lt.sdacademy.famtrip.repositories.UserRepository;
 import org.springframework.stereotype.Component;
+import lt.sdacademy.famtrip.models.dto.User;
 
 @Component
 public class HotelConverter extends AbstractBiConverter<HotelEntity, Hotel> {
 
     private final HotelRepository hotelRepository;
+    private final UserRepository userRepository;
     private final RoomConverter roomConverter;
     private final UserConverter userConverter;
     private final CityConverter cityConverter;
 
-    public HotelConverter(HotelRepository hotelRepository, RoomConverter roomConverter, UserConverter userConverter, CityConverter cityConverter) {
+    public HotelConverter(HotelRepository hotelRepository, UserRepository userRepository, RoomConverter roomConverter, UserConverter userConverter, CityConverter cityConverter) {
         this.hotelRepository = hotelRepository;
+        this.userRepository = userRepository;
         this.roomConverter = roomConverter;
         this.userConverter = userConverter;
         this.cityConverter = cityConverter;
@@ -61,7 +66,8 @@ public class HotelConverter extends AbstractBiConverter<HotelEntity, Hotel> {
         result.setDistanceToBeach(hotel.getDistanceToBeach());
         result.setDistanceFromAirport(hotel.getDistanceFromAirport());
         result.setRemarks(hotel.getRemarks());
-        result.setAuthor(userConverter.convertToEntity(hotel.getAuthor()));
+        UserEntity author = userRepository.findOneById(hotel.getAuthor().getId());
+        result.setAuthor(author);
         result.setRooms(roomConverter.convertToEntity(hotel.getRooms()));
         result.setRecommendedTos(hotel.getRecommendedTos());
         result.setLabels(hotel.getLabels());

@@ -9,8 +9,10 @@ import lt.sdacademy.famtrip.models.RecommendedTo;
 import lt.sdacademy.famtrip.models.RoomCondition;
 import lt.sdacademy.famtrip.models.Size;
 import lt.sdacademy.famtrip.models.dto.Hotel;
+import lt.sdacademy.famtrip.models.dto.User;
 import lt.sdacademy.famtrip.models.entities.HotelEntity;
 import lt.sdacademy.famtrip.repositories.HotelRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +33,9 @@ public class HotelService {
     }
 
     public Hotel save(Hotel hotel) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        hotel.setAuthor(user);
+
         HotelEntity hotelEntity = hotelConverter.convertToEntity(hotel);
         hotelRepository.save(hotelEntity);
 
