@@ -6,7 +6,6 @@ import lt.sdacademy.famtrip.models.entities.UserEntity;
 import lt.sdacademy.famtrip.repositories.HotelRepository;
 import lt.sdacademy.famtrip.repositories.UserRepository;
 import org.springframework.stereotype.Component;
-import lt.sdacademy.famtrip.models.dto.User;
 
 @Component
 public class HotelConverter extends AbstractBiConverter<HotelEntity, Hotel> {
