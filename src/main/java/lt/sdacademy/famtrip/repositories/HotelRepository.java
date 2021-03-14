@@ -14,6 +14,10 @@ import java.util.List;
 
 public interface HotelRepository extends Repository<HotelEntity, Long> {
 
+    boolean existsByName(String name);
+
+    boolean existsByNameAndIdNot(String code, Long id);
+
     List<HotelEntity> findAll();
 
     HotelEntity save(HotelEntity hotelEntity);

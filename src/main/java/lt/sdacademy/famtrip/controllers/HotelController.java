@@ -2,6 +2,7 @@ package lt.sdacademy.famtrip.controllers;
 
 import lt.sdacademy.famtrip.models.dto.Hotel;
 import lt.sdacademy.famtrip.services.HotelService;
+import lt.sdacademy.famtrip.validators.HotelValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,9 +23,11 @@ import java.util.List;
 public class HotelController {
 
     private final HotelService hotelService;
+    private final HotelValidator hotelValidator;
 
-    public HotelController(HotelService hotelService) {
+    public HotelController(HotelService hotelService, HotelValidator hotelValidator) {
         this.hotelService = hotelService;
+        this.hotelValidator = hotelValidator;
     }
 
     @GetMapping
@@ -39,6 +42,8 @@ public class HotelController {
 
     @PostMapping
     public Hotel save(@RequestBody @Valid Hotel hotel) {
+        hotelValidator.validate(hotel);
+
         return hotelService.save(hotel);
     }
 
