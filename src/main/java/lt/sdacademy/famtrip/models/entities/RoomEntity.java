@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "room")
 public class RoomEntity extends AbstractEntity {
 
-    @Column(name = "type", length = 50, unique = true)
+    @Column(name = "type", length = 50)
     private String type;
 
     @Column(name = "room_type", nullable = false)
