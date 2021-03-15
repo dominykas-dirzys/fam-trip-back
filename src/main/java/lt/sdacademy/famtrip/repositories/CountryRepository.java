@@ -6,6 +6,8 @@ import org.springframework.data.repository.Repository;
 import java.util.List;
 
 public interface CountryRepository extends Repository<CountryEntity, Long> {
+    boolean existsById(Long id);
+
     List<CountryEntity> findAll();
 
     List<CountryEntity> findAllByTitle(String title);

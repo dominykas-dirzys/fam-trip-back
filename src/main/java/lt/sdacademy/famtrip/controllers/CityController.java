@@ -2,6 +2,7 @@ package lt.sdacademy.famtrip.controllers;
 
 import lt.sdacademy.famtrip.models.dto.City;
 import lt.sdacademy.famtrip.services.CityService;
+import lt.sdacademy.famtrip.validators.CityValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,9 +23,11 @@ import java.util.List;
 public class CityController {
 
     private final CityService cityService;
+    private final CityValidator cityValidator;
 
-    public CityController(CityService cityService) {
+    public CityController(CityService cityService, CityValidator cityValidator) {
         this.cityService = cityService;
+        this.cityValidator = cityValidator;
     }
 
     @GetMapping
@@ -39,6 +42,8 @@ public class CityController {
 
     @PostMapping
     public City save(@RequestBody @Valid City city) {
+        cityValidator.validate(city);
+
         return cityService.save(city);
     }
 
