@@ -29,7 +29,7 @@ import java.util.List;
 @Table(name = "hotel")
 public class HotelEntity extends AbstractEntity {
 
-    @Column(name = "name", length = 100, nullable = false, unique = true)
+    @Column(name = "name", length = 100, nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
