@@ -10,6 +10,8 @@ public interface CityRepository extends Repository<CityEntity, Long> {
 
     boolean existsByTitleAndIdNot(String title, Long id);
 
+    boolean existsByIdAndTitleIsAndCountry_IdIs(Long id, String title, Long country_id);
+
     List<CityEntity> findAll();
 
     List<CityEntity> findAllByTitle(String title);

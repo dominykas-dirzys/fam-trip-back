@@ -55,4 +55,16 @@ public class CityValidator {
             errors.put("country", "Changing country title is not allowed");
         }
     }
+
+    public void validateMatches(City city) {
+        Map<String, String> errors = new HashMap<>();
+
+        if (!cityRepository.existsByIdAndTitleIsAndCountry_IdIs(city.getId(), city.getTitle(), city.getCountry().getId())) {
+            errors.put("city", "Such city does not exist or has changed");
+        }
+
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
+    }
 }
